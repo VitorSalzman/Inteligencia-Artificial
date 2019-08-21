@@ -52,14 +52,14 @@ def encontra_estados_sucessores (matriz, M, N, posicao_atual):
 		estados_sucessores.append ((i, j-1))
 	if j+1 < N and matriz[i][j+1] != '2': # Move para direita na matriz.
 		estados_sucessores.append ((i, j+1))
-	if j > 0 and i > 0 and matriz[i-1][j-1] != '2': # Move diagonalmente para esq sup.
-		estados_sucessores.append ((i-1, j-1))
-	if j > 0 and i+1 < M and matriz[i+1][j-1] != '2': # Move diagonalmente para esq inf.
-		estados_sucessores.append ((i+1, j-1))
-	if j+1 < N and i > 0 and matriz[i-1][j+1] != '2': # Move diagonalmente para dir sup.
-		estados_sucessores.append ((i-1, j+1))
-	if j+1 < N and i+1 < M and matriz[i+1][j+1] != '2': # Move diagonalmente para dir inf.
-		estados_sucessores.append ((i+1, j+1))
+	#if j > 0 and i > 0 and matriz[i-1][j-1] != '2': # Move diagonalmente para esq sup.
+	#	estados_sucessores.append ((i-1, j-1))
+	#if j > 0 and i+1 < M and matriz[i+1][j-1] != '2': # Move diagonalmente para esq inf.
+	#	estados_sucessores.append ((i+1, j-1))
+	#if j+1 < N and i > 0 and matriz[i-1][j+1] != '2': # Move diagonalmente para dir sup.
+	#	estados_sucessores.append ((i-1, j+1))
+	#if j+1 < N and i+1 < M and matriz[i+1][j+1] != '2': # Move diagonalmente para dir inf.
+	#	estados_sucessores.append ((i+1, j+1))
 	return estados_sucessores
 
 # Dado um estado considerado final, uma lista de predecessores e um numero de iteracao,
