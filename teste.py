@@ -215,9 +215,9 @@ if len(sys.argv) == 2:
 	problema = open(sys.argv[1]) # Chame o problem com: python buscas_ia.py data/duende_perdido_1.csv
 	leitor_problema = csv.reader (problema)
 	entrada = list(leitor_problema)
-	M = len(entrada[0][0]) # numero de linhas.
-	N = int(entrada[0][1]) # numero de colunas.
-	matriz = entrada[1:] # mapa representado como matriz.
+	matriz = entrada[0:] # mapa representado como matriz.
+	M = int(len(matriz))  # numero de linhas.
+	N = int(len(matriz[0]))  # numero de colunas.
 
 	estado_inicial = encontraPosicoes (matriz, M, N, '3')
 	estados_finais = encontraPosicoes (matriz, M, N, '0')

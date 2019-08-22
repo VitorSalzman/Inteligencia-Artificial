@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Inteligencia-Artificial.iml" filepath="$PROJECT_DIR$/.idea/Inteligencia-Artificial.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Techline/.idea/Techline.iml" filepath="$PROJECT_DIR$/../Techline/.idea/Techline.iml" />
+    </modules>
+  </component>
+</project>
