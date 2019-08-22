@@ -148,8 +148,10 @@ def busca_a_estrela (matriz, M, N, estado_inicial, estados_finais):
 # Fluxo principal do program em Python.
 # Inspirado no problema 'Duende Perdido' da Olimpiada Brasileira de Informatica de 2005 - OBI 2005.
 if len(sys.argv) == 2:
-	problema = open(sys.argv[1]) # Chame o problem com: python buscas_ia.py data/duende_perdido_1.csv
-	leitor_problema = csv.reader (problema)
+	problema = open(sys.argv[1],'r') # Chame o problem com: python buscas_ia.py data/duende_perdido_1.csv
+	# leitor_problema = csv.reader (problema)
+	for line in problema:
+		entrada
 	entrada = list(leitor_problema)
 	matriz = entrada[0:] # mapa representado como matriz.
 	M = int(len(matriz))  # numero de linhas.
