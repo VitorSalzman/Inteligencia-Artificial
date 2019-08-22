@@ -145,15 +145,27 @@ def busca_a_estrela (matriz, M, N, estado_inicial, estados_finais):
 	else:
 		print("Nao foi possivel encontrar uma solucao para o problema.")
 
-# Fluxo principal do program em Python.
-# Inspirado no problema 'Duende Perdido' da Olimpiada Brasileira de Informatica de 2005 - OBI 2005.
+def leitura_txt(arquivo):
+	file = open(arquivo,'r')
+	matriz = []
+	for line in file:
+		matrizLine = []
+		for c in line:
+			if c != "\n" and c != " ":
+				matrizLine.append(c)
+		matriz.append(matrizLine)
+		print(matrizLine)
+
+	return matriz
+
 if len(sys.argv) == 2:
 	problema = open(sys.argv[1],'r') # Chame o problem com: python buscas_ia.py data/duende_perdido_1.csv
-	# leitor_problema = csv.reader (problema)
-	for line in problema:
-		entrada
+	leitor_problema = csv.reader (problema)
 	entrada = list(leitor_problema)
-	matriz = entrada[0:] # mapa representado como matriz.
+
+	matriz = leitura_txt(sys.argv[1])
+
+	# matriz = entrada[0:] # mapa representado como matriz.
 	M = int(len(matriz))  # numero de linhas.
 	N = int(len(matriz[0]))  # numero de colunas.
 
