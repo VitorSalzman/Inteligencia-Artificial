@@ -1,27 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  teste.py
-#  
-#  Copyright 2019 20161BSI0403 <20161BSI0403@SR6733>
-#  
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#  
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#  
-#  You should have received a copy of the GNU General Public License
-#  along with this program; if not, write to the Free Software
-#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-#  MA 02110-1301, USA.
-#  
-#  
-
 
 import sys
 import csv
@@ -51,15 +27,8 @@ def encontra_estados_sucessores (matriz, M, N, posicao_atual):
 	if j > 0 and matriz[i][j-1] != '2': # Move para esquerda na matriz.
 		estados_sucessores.append ((i, j-1))
 	if j+1 < N and matriz[i][j+1] != '2': # Move para direita na matriz.
-		estados_sucessores.append ((i, j+1))
-	#if j > 0 and i > 0 and matriz[i-1][j-1] != '2': # Move diagonalmente para esq sup.
-	#	estados_sucessores.append ((i-1, j-1))
-	#if j > 0 and i+1 < M and matriz[i+1][j-1] != '2': # Move diagonalmente para esq inf.
-	#	estados_sucessores.append ((i+1, j-1))
-	#if j+1 < N and i > 0 and matriz[i-1][j+1] != '2': # Move diagonalmente para dir sup.
-	#	estados_sucessores.append ((i-1, j+1))
-	#if j+1 < N and i+1 < M and matriz[i+1][j+1] != '2': # Move diagonalmente para dir inf.
-	#	estados_sucessores.append ((i+1, j+1))
+		estados_sucessores.append((i, j + 1))
+
 	return estados_sucessores
 
 # Dado um estado considerado final, uma lista de predecessores e um numero de iteracao,
@@ -68,7 +37,7 @@ def encontra_estados_sucessores (matriz, M, N, posicao_atual):
 
 def printa_matriz(mat):
 	for i in mat:
-		print("%s", i)
+		print(i)
 	
 def apresenta_solucao (estado, predecessores, iteracao):
 	caminho = []
@@ -130,39 +99,6 @@ def mostra_valores_franja (franja, heuristica):
 		print("V_%s = %s", str(estado), str(heuristica[estado]))
 	print("===================================")
 
-# Algoritmo: Busca em Largura (Breadth-First Search)
-# Dada uma matriz, um estado inicial e estados finais, define um conjunto de acoes para alcancar um dos estados finais.
-def busca_em_largura (matriz, M, N, estado_inicial, estados_finais):
-	estados_visitados = []
-	estados_expandidos = []
-	profundidade_estados = {}
-	predecessores = {}
-	solucao_encontrada = False
-	print("Algoritmo: Busca em Largura")
-	estados_visitados.append(estado_inicial)
-	profundidade_estados[estado_inicial] = 0
-	predecessores[estado_inicial] = None
-	iteracao = 1
-	while len(estados_visitados) != 0:
-		# mostra_estados_fila (estados_visitados) # Mostra a fila do algoritmo em cada iteracao.
-		estado = estados_visitados.pop(0)
-		if estado in estados_finais:
-			solucao_encontrada = True
-			break
-		estados_sucessores = encontra_estados_sucessores (matriz, M, N, estado)
-		estados_expandidos.append(estado)
-		for i in range (0, len(estados_sucessores)):
-			sucessor = estados_sucessores[i]
-			if sucessor not in estados_expandidos and sucessor not in estados_visitados:
-					estados_visitados.append(estados_sucessores[i])
-					profundidade_estados[estados_sucessores[i]] = profundidade_estados[estado] + 1
-					predecessores[estados_sucessores[i]] = estado
-		iteracao = iteracao + 1
-
-	if solucao_encontrada == True:
-		apresenta_solucao (estado, predecessores, iteracao)
-	else:
-		print("Nao foi possivel encontrar uma solucao para o problema.")
 
 # Algoritmo: Busca A* (A Estrela / A Star)
 def busca_a_estrela (matriz, M, N, estado_inicial, estados_finais):
@@ -221,11 +157,13 @@ if len(sys.argv) == 2:
 
 	estado_inicial = encontraPosicoes (matriz, M, N, '3')
 	estados_finais = encontraPosicoes (matriz, M, N, '0')
+	# receber por scanner os estados iniciais e finais
+
 	print("Matriz (mapa): ")
-	print(str(matriz))
+	for i in matriz:
+		print(i)
 	print("Estado Inicial: %s" + str(estado_inicial))
 	print("Estado Final: " + str(estados_finais))
-	busca_em_largura (matriz, M, N, estado_inicial[0], estados_finais)
 	busca_a_estrela (matriz, M, N, estado_inicial[0], estados_finais)
 else:
 	print("Forneca um arquivo CSV para os algoritmos de busca.")
