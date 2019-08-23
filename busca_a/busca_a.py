@@ -6,13 +6,18 @@ from math import pow
 
 # Dada uma matriz e um valor, encontra as coordenadas (i,j)
 # que contenham o valor procurado.
-def encontraPosicoes(startEnds):
-    for posicoes in startEnds:
-        for tupla in posicoes:
-            if matriz[tupla[0]][tupla[1]] == '1':
-                print("Entrada/Saida inserida em obstaculo, favor inserir coordenada valida")
-                return False
-    return True
+def verificaObstaculo(startEnds):
+	
+	
+	for posicoes in startEnds:
+		for tupla in posicoes:
+			if (tupla[0] > len(matriz) or tupla[1] > len(matriz[0])):
+				print ('Erro! Dimensões incorretas!')
+				return False
+			if matriz[tupla[0]][tupla[1]] == '1':
+				print("Entrada/Saida inserida em obstaculo, favor inserir coordenada valida")
+				return False
+	return True
 
 
 # Dada uma matriz e a posicao atual pelas coordenadas (i,j),
@@ -185,7 +190,7 @@ if len(sys.argv) == 2:
     estados_finais = input("Enter the (x,y) coordinates to End: ")
     estados_finais = [tuple(int(x) for x in estados_finais.split(" "))]
 
-    if encontraPosicoes([estado_inicial, estados_finais]):
+    if verificaObstaculo([estado_inicial, estados_finais]):
         print("Matriz (mapa): ")
         for i in matriz:
             print(i)
