@@ -36,7 +36,11 @@ def encontra_estados_sucessores (matriz, M, N, posicao_atual):
 # e chegar ate o estado final a partir da solucao parcial armazenada em predecessores.
 
 def printa_matriz(mat):
-	for i in mat:
+	for tupla in mat:
+		matriz[tupla[0]][tupla[1]] = '#'
+	matriz[mat[0][0]][mat[0][1]] = 'S'
+	matriz[mat[-1][0]][mat[-1][1]] = 'E'
+	for i in matriz:
 		print(i)
 	
 def apresenta_solucao (estado, predecessores, iteracao):
