@@ -4,15 +4,15 @@ import csv
 from math import sqrt
 from math import pow
 
-# Dada uma matriz e um valor, encontra as coordenadas (i,j) 
+# Dada uma matriz e um valor, encontra as coordenadas (i,j)
 # que contenham o valor procurado.
-def encontraPosicoes (matriz, M, N, valor):
-	posicoes = []
-	for i in range(0, M):
-		for j in range(0, N):
-			if matriz[i][j] == valor:
-				posicoes.append((i, j))
-	return posicoes
+def encontraPosicoes (startEnds):
+	for posicoes in startEnds:
+		for tupla in posicoes:
+			if matriz[tupla[0]][tupla[1]] == '1':
+				print("Entrada/Saida inserida em obstaculo, favor inserir coordenada valida")
+				return False
+	return True
 
 # Dada uma matriz e a posicao atual pelas coordenadas (i,j), 
 # encontra os estados sucessores com 1 passo de (i,j)
@@ -20,13 +20,13 @@ def encontra_estados_sucessores (matriz, M, N, posicao_atual):
 	i = posicao_atual[0]
 	j = posicao_atual[1]
 	estados_sucessores = []
-	if i > 0 and matriz[i-1][j] != '2': # Move para cima na matriz.
+	if i > 0 and matriz[i-1][j] != '1': # Move para cima na matriz.
 		estados_sucessores.append ((i-1, j))
-	if i+1 < M and matriz[i+1][j] != '2': # Move para baixo na matriz.
+	if i+1 < M and matriz[i+1][j] != '1': # Move para baixo na matriz.
 		estados_sucessores.append ((i+1, j))
-	if j > 0 and matriz[i][j-1] != '2': # Move para esquerda na matriz.
+	if j > 0 and matriz[i][j-1] != '1': # Move para esquerda na matriz.
 		estados_sucessores.append ((i, j-1))
-	if j+1 < N and matriz[i][j+1] != '2': # Move para direita na matriz.
+	if j+1 < N and matriz[i][j+1] != '1': # Move para direita na matriz.
 		estados_sucessores.append((i, j + 1))
 
 	return estados_sucessores
@@ -159,25 +159,26 @@ def leitura_txt(arquivo):
 	return matriz
 
 if len(sys.argv) == 2:
-	problema = open(sys.argv[1],'r') # Chame o problem com: python buscas_ia.py data/duende_perdido_1.csv
-	leitor_problema = csv.reader (problema)
-	entrada = list(leitor_problema)
 
 	matriz = leitura_txt(sys.argv[1])
 
-	# matriz = entrada[0:] # mapa representado como matriz.
 	M = int(len(matriz))  # numero de linhas.
 	N = int(len(matriz[0]))  # numero de colunas.
 
-	estado_inicial = encontraPosicoes (matriz, M, N, '3')
-	estados_finais = encontraPosicoes (matriz, M, N, '0')
+
 	# receber por scanner os estados iniciais e finais
 
-	print("Matriz (mapa): ")
-	for i in matriz:
-		print(i)
-	print("Estado Inicial: %s" + str(estado_inicial))
-	print("Estado Final: " + str(estados_finais))
-	busca_a_estrela (matriz, M, N, estado_inicial[0], estados_finais)
+	estado_inicial = input("Enter the (x,y) coordinates to Start: ")
+	estado_inicial = [tuple(int(x) for x in estado_inicial.split(" "))]
+	estados_finais = input("Enter the (x,y) coordinates to End: ")
+	estados_finais = [tuple(int(x) for x in estados_finais.split(" "))]
+
+	if encontraPosicoes([estado_inicial,estados_finais]):
+		print("Matriz (mapa): ")
+		for i in matriz:
+			print(i)
+		print("Estado Inicial: " + str(estado_inicial))
+		print("Estado Final: " + str(estados_finais))
+		busca_a_estrela (matriz, M, N, estado_inicial[0], estados_finais)
 else:
 	print("Forneca um arquivo CSV para os algoritmos de busca.")
