@@ -1,6 +1,6 @@
 # Inteligencia Artificial
 
-#### <font color "#27AE60"> Membros </font><br>
+#### <font color="#27AE60"> Membros </font><br>
 Vitor Soares Salzman - 20161bsi0403 - vitor-salzman96@hotmail.com<br>
 Luiz Antonio Roque Guzzo - 20151bsi0193 - luizguzzo@gmail.com<br>
 
