@@ -22,7 +22,9 @@ Desse modo f(n) é, portanto, o custo estimado da solução de custo mais baixo 
 O problema proposto é o caminho descrito na figura a seguir, onde um objeto precisa caminhar verticalmente/horizontalmente do ponto inicial, até o ponto final, sem que este colida com os obstáculos(em preto). O algoritmo deve ser capaz de definir o melhor caminho, de acordo com a heurística recebida.<br>
 
 ### Implementação<br>
-O código completo encontra-se em https://github.com/VitorSalzman/Inteligencia-Artificial. <br>
+O código completo encontra-se em https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/busca_a/busca_a.py. <br>
+
+   
 
 ### Resultados<br>
 
