@@ -26,6 +26,7 @@ O trecho a seguir, recebe parâmetros de linha e coluna e, de acordo com o estad
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/data/EncontraEstadosSucessores.PNG"> <br><br>
 
 A função "verificaObstaculo" retorna <b>True</br>, caso as dimensões passadas por parâmetro sejam válidas(valor de linha e coluna devem pertencer ao tamanho da Matriz, além de não coincidirem com algum obstáculo). Caso contrário, retorna <b>False</b><br>
+
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/data/EncontraEstadosSucessores.PNG"> <br><br>
 
 O código completo encontra-se em https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/busca_a/busca_a.py. <br>
