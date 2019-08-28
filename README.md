@@ -22,8 +22,11 @@ Desse modo f(n) é, portanto, o custo estimado da solução de custo mais baixo 
 O problema proposto é o caminho descrito na figura a seguir, onde um objeto precisa caminhar verticalmente/horizontalmente do ponto inicial, até o ponto final, sem que este colida com os obstáculos(em preto). O algoritmo deve ser capaz de definir o melhor caminho, de acordo com a heurística recebida.<br>
 
 ### Implementação<br>
-O trecho a seguir, recebe parâmetros de linha e coluna e, de acordo com o estado representado, calcula os estados sucessores com peso 1 à frente.<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/data/EncontraEstadosSucessores.PNG"> <br>
+O trecho a seguir, recebe parâmetros de linha e coluna e, de acordo com o estado representado, calcula os estados sucessores com peso 1 à frente.<br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/data/EncontraEstadosSucessores.PNG"> <br><br>
+
+A função "verificaObstaculo" retorna <b>True</br>, caso as dimensões passadas por parâmetro sejam válidas(valor de linha e coluna devem pertencer ao tamanho da Matriz, além de não coincidirem com algum obstáculo). Caso contrário, retorna <b>False</b><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/data/EncontraEstadosSucessores.PNG"> <br><br>
 
 O código completo encontra-se em https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/busca_a/busca_a.py. <br>
 
