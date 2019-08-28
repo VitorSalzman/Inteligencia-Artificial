@@ -1,31 +1,29 @@
 import sys
-import csv
 from math import sqrt
 from math import pow
 
 
-# Dada uma matriz e um valor, encontra as coordenadas (i,j)
-# que contenham o valor procurado.
+# verifica se as coordenadas de inicio e fim estão em um obstaculo ou acima da dimensão
 def verificaObstaculo(startEnds):
-	
-	
-	for posicoes in startEnds:
-		for tupla in posicoes:
-			if (tupla[0] > len(matriz) or tupla[1] > len(matriz[0])):
-				print ('Erro! Dimensões incorretas!')
-				return False
-			if matriz[tupla[0]][tupla[1]] == '1':
-				print("Entrada/Saida inserida em obstaculo, favor inserir coordenada valida")
-				return False
-	return True
+
+    for posicoes in startEnds:
+        for tupla in posicoes:
+            if (tupla[0] > len(matriz)-1 or tupla[1] > len(matriz[0])-1):
+                print ('Erro! Dimensões incorretas!')
+                return False
+            if matriz[tupla[0]][tupla[1]] == '1':
+                print("Entrada/Saida inserida em obstaculo, favor inserir coordenada valida")
+                return False
+
+    return True
 
 
 # Dada uma matriz e a posicao atual pelas coordenadas (i,j),
 # encontra os estados sucessores com 1 passo de (i,j)
-def encontra_estados_sucessores(matriz, M, N, posicao_atual):
+def encontra_estados_sucessores(matriz, M, N, posicao_atual): # M e N podem ser extraidos de matriz, ja que são o tamanho maximo em linha e coluna da matriz
     i = posicao_atual[0]
     j = posicao_atual[1]
-    estados_sucessores = []
+    estados_sucessores = [] # isso não precisava ser um array
     if i > 0 and matriz[i - 1][j] != '1':  # Move para cima na matriz.
         estados_sucessores.append((i - 1, j))
     if i + 1 < M and matriz[i + 1][j] != '1':  # Move para baixo na matriz.
@@ -38,10 +36,6 @@ def encontra_estados_sucessores(matriz, M, N, posicao_atual):
     return estados_sucessores
 
 
-# Dado um estado considerado final, uma lista de predecessores e um numero de iteracao,
-# apresenta em qual iteracao foi encontrada a solucao e como partir do estado inicial 
-# e chegar ate o estado final a partir da solucao parcial armazenada em predecessores.
-
 def printa_matriz(mat):
     for tupla in mat:
         matriz[tupla[0]][tupla[1]] = '#'
@@ -50,6 +44,10 @@ def printa_matriz(mat):
     for i in matriz:
         print(i)
 
+
+# Dado um estado considerado final, uma lista de predecessores e um numero de iteracao,
+# apresenta em qual iteracao foi encontrada a solucao e como partir do estado inicial
+# e chegar ate o estado final a partir da solucao parcial armazenada em predecessores.
 
 def apresenta_solucao(estado, predecessores, iteracao):
     caminho = []
@@ -69,7 +67,7 @@ def calcula_distancia_meta(estado, estados_finais):
     y = estado[1]
     distancia_minima = 1000000000
 
-    for estado_final in estados_finais:
+    for estado_final in estados_finais: # para cada estado final (se tiver + de 1) calcula a hipotenusa que é o mahatan
         x_estado_final = estado_final[0]
         y_estado_final = estado_final[1]
         diff1 = x_estado_final - x
@@ -102,7 +100,7 @@ def mostra_estados_fila(fila):
     print("===================================")
     print("Estados para analisar")
     for estado in fila:
-        print("%s", str(estado))
+        print(str(estado))
     print("===================================")
 
 
@@ -112,7 +110,7 @@ def mostra_valores_franja(franja, heuristica):
     print("===================================")
     print("Valores da franja")
     for estado in franja:
-        print("V_%s = %s", str(estado), str(heuristica[estado]))
+        print("V_{} = {}".format(str(estado),str(heuristica[estado])))
     print("===================================")
 
 
