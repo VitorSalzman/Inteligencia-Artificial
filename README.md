@@ -30,10 +30,10 @@ A função "verificaObstaculo" retorna <b>True</b>, caso as dimensões passadas 
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/EncontraEstadosSucessores.PNG"> <br><br>
 
 Este trecho calcula o peso da distância de um estado, até o estado final, ou seja, o objetivo.<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/CalculaDistanciaMeta.PNG"><br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/CalculaDistanciaMeta.png"><br><br>
 
 De acordo com a "margem"(estados que contornam o estado atual) e a heurística(h=f+g), calcula-se o estado mais promissor.<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/EncontraEstadoPromissor.PNG"><br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/EncontraEstadoPromissor.png"><br><br>
 
 Esse loop controla todas as iterações do código. A cada tentativa de caminho, uma iteração é adicionada.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/Tentativas.png"><br><br>
