@@ -23,11 +23,20 @@ O problema proposto é o caminho descrito na figura a seguir, onde um objeto pre
 
 ### Implementação<br>
 O trecho a seguir, recebe parâmetros de linha e coluna e, de acordo com o estado representado, calcula os estados sucessores com peso 1 à frente.<br><br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/data/EncontraEstadosSucessores.PNG"> <br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/EncontraEstadosSucessores.PNG"> <br><br>
 
-A função "verificaObstaculo" retorna <b>True</br>, caso as dimensões passadas por parâmetro sejam válidas(valor de linha e coluna devem pertencer ao tamanho da Matriz, além de não coincidirem com algum obstáculo). Caso contrário, retorna <b>False</b><br>
+A função "verificaObstaculo" retorna <b>True</b>, caso as dimensões passadas por parâmetro sejam válidas(valor de linha e coluna devem pertencer ao tamanho da Matriz, além de não coincidirem com algum obstáculo). Caso contrário, retorna <b>False</b><br>
 
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/data/EncontraEstadosSucessores.PNG"> <br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/EncontraEstadosSucessores.PNG"> <br><br>
+
+Este trecho calcula o peso da distância de um estado, até o estado final, ou seja, o objetivo.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/CalculaDistanciaMeta.PNG"><br><br>
+
+De acordo com a "margem"(estados que contornam o estado atual) e a heurística(h=f+g), calcula-se o estado mais promissor.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/EncontraEstadoPromissor.PNG"><br><br>
+
+Esse loop controla todas as iterações do código. A cada tentativa de caminho, uma iteração é adicionada.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/Tentativas.PNG"><br><br>
 
 O código completo encontra-se em https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/busca_a/busca_a.py. <br>
 
