@@ -36,7 +36,7 @@ De acordo com a "margem"(estados que contornam o estado atual) e a heurística(h
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/EncontraEstadoPromissor.PNG"><br><br>
 
 Esse loop controla todas as iterações do código. A cada tentativa de caminho, uma iteração é adicionada.<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/Tentativas.PNG"><br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/Tentativas.png"><br><br>
 
 O código completo encontra-se em https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/busca_a/busca_a.py. <br>
 
