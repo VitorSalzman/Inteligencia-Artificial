@@ -60,7 +60,7 @@ def apresenta_solucao(estado, predecessores, iteracao):
 
 # Dado um estado qualquer e um conjunto de estados finais,
 # calcula a distancia do estado qualquer ate um estado final mais proximo.
-def calcula_distancia_meta(estado, estados_finais):
+def calcula_distancia_meta(estado, estados_finais): # MAHATAN
     x = estado[0]
     y = estado[1]
     distancia_minima = 1000000000
@@ -80,41 +80,20 @@ def calcula_distancia_meta(estado, estados_finais):
 # encontra o estado com menor valor nessa franja.
 def encontra_estado_mais_promissor(franja, heuristica_estados):
     valor_mais_promissor = 1000000000
-    estado_mais_promissor = None
     indice_mais_promissor = 0
     indice = 0
     for estado in franja:
         if heuristica_estados[estado] < valor_mais_promissor:
-            estado_mais_promissor = estado
             valor_mais_promissor = heuristica_estados[estado]
             indice_mais_promissor = indice
         indice = indice + 1
     return indice_mais_promissor
 
 
-# Dada uma fila com alguns estados, apresenta cada um deles.
-def mostra_estados_fila(fila):
-    print("===================================")
-    print("Estados para analisar")
-    for estado in fila:
-        print(str(estado))
-    print("===================================")
-
-
-# Dada uma franja (fringe) com alguns estados, apresenta o valor heuristico
-# de cada um deles.
-def mostra_valores_franja(franja, heuristica):
-    print("===================================")
-    print("Valores da franja")
-    for estado in franja:
-        print("V_{} = {}".format(str(estado),str(heuristica[estado])))
-    print("===================================")
 
 
 # Algoritmo: Busca A* (A Estrela / A Star)
 def busca_a_estrela(matriz, estado_inicial, estados_finais):
-    M = int(len(matriz))  # numero de linhas.
-    N = int(len(matriz[0]))  # numero de colunas.
 
     distancia_meta = {}
     distancia_percorrida = {}
@@ -126,25 +105,24 @@ def busca_a_estrela(matriz, estado_inicial, estados_finais):
     print("Algoritmo: A* (A Estrela)")
 
     # Inicializacao de distancia percorrida (f), distancia ate a meta (g) e heuristica (h = f+g).
-    distancia_percorrida[estado_inicial] = 0
-    distancia_meta[estado_inicial] = calcula_distancia_meta(estado_inicial, estados_finais)
-    heuristica[estado_inicial] = distancia_percorrida[estado_inicial] + distancia_meta[estado_inicial]
-    predecessores[estado_inicial] = None
+    distancia_percorrida[estado_inicial] = 0                                                                # o quanto andou
+    distancia_meta[estado_inicial] = calcula_distancia_meta(estado_inicial, estados_finais)                 # a distancia mahatan pro destino
+    heuristica[estado_inicial] = distancia_percorrida[estado_inicial] + distancia_meta[estado_inicial]      # a soma dos 2 para definir a heuristica
+    predecessores[estado_inicial] = None                                                                    # não tem pq acabou de iniciar
     print ("Heuristica da Distancia no Estado Inicial: " + str(heuristica[estado_inicial]))
     franja = []
     franja.append(estado_inicial)
     iteracao = 1
     while len(franja) != 0:
-        # mostra_valores_franja (franja, heuristica)
         indice_mais_promissor = encontra_estado_mais_promissor(franja, heuristica)
         estado = franja.pop(indice_mais_promissor)
         if estado in estados_finais:
             solucao_encontrada = True
             break
-        estados_sucessores = encontra_estados_sucessores(matriz, estado)
+        estados_sucessores = encontra_estados_sucessores(matriz, estado)                                    # estados que não são parede
         estados_expandidos.append(estado)
-        for i in range(0, len(estados_sucessores)):
-            sucessor = estados_sucessores[i]
+
+        for sucessor in estados_sucessores:
             if sucessor not in estados_expandidos and sucessor not in franja:
                 franja.append(sucessor)
                 if sucessor not in heuristica.keys():
