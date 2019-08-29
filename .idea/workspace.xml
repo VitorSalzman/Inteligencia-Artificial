@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0cb64119-c612-4312-a366-8bc806d075ce" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Inteligencia-Artificial.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Inteligencia-Artificial.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/busca_a/busca_a.py" beforeDir="false" afterPath="$PROJECT_DIR$/busca_a/busca_a.py" afterDir="false" />
     </list>

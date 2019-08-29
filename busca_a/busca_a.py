@@ -17,10 +17,11 @@ def verificaObstaculo(startEnds):
 
     return True
 
-
 # Dada uma matriz e a posicao atual pelas coordenadas (i,j),
 # encontra os estados sucessores com 1 passo de (i,j)
-def encontra_estados_sucessores(matriz, M, N, posicao_atual): # M e N podem ser extraidos de matriz, ja que são o tamanho maximo em linha e coluna da matriz
+def encontra_estados_sucessores(matriz, posicao_atual): # M e N podem ser extraidos de matriz, ja que são o tamanho maximo em linha e coluna da matriz
+    M = int(len(matriz))  # numero de linhas.
+    N = int(len(matriz[0]))  # numero de colunas.
     i = posicao_atual[0]
     j = posicao_atual[1]
     estados_sucessores = [] # isso não precisava ser um array
@@ -35,15 +36,13 @@ def encontra_estados_sucessores(matriz, M, N, posicao_atual): # M e N podem ser 
 
     return estados_sucessores
 
-
-def printa_matriz(mat):
+def printa_matriz(mat): # altera a matriz para printa a resposta
     for tupla in mat:
         matriz[tupla[0]][tupla[1]] = '#'
     matriz[mat[0][0]][mat[0][1]] = 'S'
     matriz[mat[-1][0]][mat[-1][1]] = 'E'
     for i in matriz:
         print(i)
-
 
 # Dado um estado considerado final, uma lista de predecessores e um numero de iteracao,
 # apresenta em qual iteracao foi encontrada a solucao e como partir do estado inicial
@@ -58,7 +57,6 @@ def apresenta_solucao(estado, predecessores, iteracao):
         estado = predecessores[estado]
     caminho = caminho[::-1]
     printa_matriz(caminho)
-
 
 # Dado um estado qualquer e um conjunto de estados finais,
 # calcula a distancia do estado qualquer ate um estado final mais proximo.
@@ -77,7 +75,6 @@ def calcula_distancia_meta(estado, estados_finais):
         if distancia_atual < distancia_minima:
             distancia_minima = distancia_atual
     return distancia_minima
-
 
 # Dada uma franja (fringe) e uma funcao heuristica,
 # encontra o estado com menor valor nessa franja.
@@ -115,7 +112,10 @@ def mostra_valores_franja(franja, heuristica):
 
 
 # Algoritmo: Busca A* (A Estrela / A Star)
-def busca_a_estrela(matriz, M, N, estado_inicial, estados_finais):
+def busca_a_estrela(matriz, estado_inicial, estados_finais):
+    M = int(len(matriz))  # numero de linhas.
+    N = int(len(matriz[0]))  # numero de colunas.
+
     distancia_meta = {}
     distancia_percorrida = {}
     heuristica = {}
@@ -141,7 +141,7 @@ def busca_a_estrela(matriz, M, N, estado_inicial, estados_finais):
         if estado in estados_finais:
             solucao_encontrada = True
             break
-        estados_sucessores = encontra_estados_sucessores(matriz, M, N, estado)
+        estados_sucessores = encontra_estados_sucessores(matriz, estado)
         estados_expandidos.append(estado)
         for i in range(0, len(estados_sucessores)):
             sucessor = estados_sucessores[i]
@@ -173,13 +173,9 @@ def leitura_txt(arquivo):
 
     return matriz
 
-
 if len(sys.argv) == 2:
 
     matriz = leitura_txt(sys.argv[1])
-
-    M = int(len(matriz))  # numero de linhas.
-    N = int(len(matriz[0]))  # numero de colunas.
 
     # receber por scanner os estados iniciais e finais
 
@@ -194,6 +190,6 @@ if len(sys.argv) == 2:
             print(i)
         print("Estado Inicial: " + str(estado_inicial))
         print("Estado Final: " + str(estados_finais))
-        busca_a_estrela(matriz, M, N, estado_inicial[0], estados_finais)
+        busca_a_estrela(matriz, estado_inicial[0], estados_finais)
 else:
     print("Forneca um arquivo CSV para os algoritmos de busca.")
