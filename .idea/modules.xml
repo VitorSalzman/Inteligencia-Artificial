@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Inteligencia-Artificial.iml" filepath="$PROJECT_DIR$/.idea/Inteligencia-Artificial.iml" />
       <module fileurl="file://$PROJECT_DIR$/../Techline/.idea/Techline.iml" filepath="$PROJECT_DIR$/../Techline/.idea/Techline.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../processaimagem/.idea/processaimagem.iml" filepath="$PROJECT_DIR$/../processaimagem/.idea/processaimagem.iml" />
     </modules>
   </component>
 </project>
