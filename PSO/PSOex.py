@@ -3,8 +3,8 @@ import numpy as np
 import math
 
 W = 0.5
-c1 = 0.8
-c2 = 0.9
+c1 = 0.15
+c2 = 0.15
 
 n_iterations = int(input("Inform the number of iterations: "))
 target_error = float(input("Inform the target error: "))
@@ -13,14 +13,11 @@ n_particles = int(input("Inform the number of particles: "))
 
 class Particle():
     def __init__(self):
-        self.position = np.array([(-1) ** (bool(random.getrandbits(1))) * random.random() * 50,
-                                  (-1) ** (bool(random.getrandbits(1))) * random.random() * 50])
+        self.position = np.array([(-1) ** (bool(random.getrandbits(1))) * random.random() * 512,
+                                  (-1) ** (bool(random.getrandbits(1))) * random.random() * 512])
         self.pbest_position = self.position
         self.pbest_value = float('inf')
         self.velocity = np.array([0, 0])
-
-    def __str__(self):
-        print("I am at ", self.position, " meu pbest is ", self.pbest_position)
 
     def move(self):
         self.position = self.position + self.velocity
@@ -38,7 +35,7 @@ class Space():
 
     def print_particles(self):
         for particle in self.particles:
-            particle.__str__()
+            print("I am at {} my pbest is {} and my fitness is {}".format(particle.position,particle.pbest_position,self.fitness(particle)))
 
     def fitness(self, particle):
         x = particle.position[0]
@@ -84,9 +81,11 @@ while (iteration < n_iterations):
     search_space.set_gbest()
 
     if (abs(search_space.gbest_value - search_space.target) <= search_space.target_error):
+        #condição de parada
         break
 
     search_space.move_particles()
     iteration += 1
 
-print("The best solution is: ", search_space.gbest_position, " in n_iterations: ", iteration)
+# f(512,404.2319) = -959.6407
+print("The best solution is: {} in n_iterations: {}".format(search_space.gbest_position,iteration))
