@@ -2,9 +2,9 @@ import random
 import numpy as np
 import math
 
-W = 0.5
-c1 = 0.15
-c2 = 0.15
+W=0.9
+c1 = 2.5
+c2 = 2.5
 
 n_iterations = int(input("Inform the number of iterations: "))
 target_error = float(input("Inform the target error: "))
@@ -17,10 +17,25 @@ class Particle():
                                   (-1) ** (bool(random.getrandbits(1))) * random.random() * 512])
         self.pbest_position = self.position
         self.pbest_value = float('inf')
-        self.velocity = np.array([0, 0])
+        self.velocity = np.array([(-1) ** (bool(random.getrandbits(1))) * random.random() * 77,
+                                  (-1) ** (bool(random.getrandbits(1))) * random.random() * 77])
 
     def move(self):
-        self.position = self.position + self.velocity
+        caminha = self.position + self.velocity
+        if caminha[0] > 512:
+            caminha[0] = 512
+            self.velocity[0] = 0
+        if caminha[0] > -512:
+            caminha[0] = -512
+            self.velocity[0] = 0
+        if caminha[1] > 512:
+            caminha[1] = 512
+            self.velocity[1] = 0
+        if caminha[1] > -512:
+            caminha[1] = -512
+            self.velocity[1] = 0
+
+        self.position = caminha
 
 
 class Space():
@@ -61,11 +76,29 @@ class Space():
                 self.gbest_position = particle.position
 
     def move_particles(self):
+
         for particle in self.particles:
-            global W
+
+            print("(W * particle.velocity) = {}".format((W * particle.velocity)))
+            print("((c1 * random.random())) = {}".format(c1 * random.random()))
+            print("(particle.pbest_position - particle.position) = {}".format(
+                particle.pbest_position - particle.position))
+            print("(random.random() * c2) = {}".format(random.random() * c2))
+            print("(self.gbest_position - particle.position) = {}".format(self.gbest_position - particle.position))
+
             new_velocity = (W * particle.velocity) + (c1 * random.random()) * (
-                        particle.pbest_position - particle.position) + \
-                           (random.random() * c2) * (self.gbest_position - particle.position)
+                        (particle.pbest_position - particle.position) + (random.random() * c2) * (
+                            self.gbest_position - particle.position))
+            print("AQUIIIIIIIIIIIIIIIIII: {}".format(new_velocity))
+            if (new_velocity[0] > 77):
+                new_velocity[0] = 77
+            if (new_velocity[0] < (-77)):
+                new_velocity[0] = -77
+            if (new_velocity[1] > 77):
+                new_velocity[1] = 77
+            if (new_velocity[1] < (-77)):
+                new_velocity[1] = -77
+
             particle.velocity = new_velocity
             particle.move()
 
@@ -79,7 +112,7 @@ iteration = 0
 while (iteration < n_iterations):
     search_space.set_pbest()
     search_space.set_gbest()
-
+    W = 0.9 - (iteration * ((0.9 - 0.4) / n_iterations))
     if (abs(search_space.gbest_value - search_space.target) <= search_space.target_error):
         #condição de parada
         break
