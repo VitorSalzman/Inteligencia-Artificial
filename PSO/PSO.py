@@ -27,19 +27,36 @@ from random import randint
 def inicializa_P(particles):
 	lista=[particles]
 	for i in range(particles):
-		lista.append(randint(-512,512))
-	return particles	
+		for j in range(dimentions):
+			d1=randint(-512,512)
+			d2=
+		lista.append()
+	return lista	
+"""
+class Particle():
+    def __init__(self):
+        self.position = np.array([(-1) ** (bool(random.getrandbits(1))) * random.random() * 512,
+                                  (-1) ** (bool(random.getrandbits(1))) * random.random() * 512])
+        self.pbest_position = self.position
+        self.pbest_value = float('inf')
+        self.velocity = np.array([0, 0])
 
-
+    def move(self):
+        self.position = self.position + self.velocity
+"""
 def main(args):
 	
-	P = int(args[1])
+	P = int(args[1])#Número de partículas
+	iterations=int(args[2])#Número de interações
+	
 	list_P = [P]
 	
 	list_P=inicializa_P(P)
 	
+	
+	
 	for i in range(P):
-		print("aqui")
+		
 		print(list_P[i])
 	
 	return 0

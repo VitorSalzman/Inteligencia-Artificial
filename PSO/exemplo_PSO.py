@@ -35,7 +35,7 @@ class Particle:
         self.err_i = -1  # error individual
 
         for i in range(0, num_dimensions):
-            self.velocity_i.append(random.uniform(-1, 1))
+            self.velocity_i.append(random.uniform(-77, 77))
             self.position_i.append(x0[i])
 
     # evaluate current fitness
