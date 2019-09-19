@@ -24,14 +24,9 @@
 
 from random import randint
 
-def inicializa_P(particles):
-	lista=[particles]
-	for i in range(particles):
-		for j in range(dimentions):
-			d1=randint(-512,512)
-			d2=
-		lista.append()
-	return lista	
+	
+xy=[0,0]	
+	
 """
 class Particle():
     def __init__(self):
@@ -44,23 +39,57 @@ class Particle():
     def move(self):
         self.position = self.position + self.velocity
 """
+
+def gera_velocidade():
+		velocidade=[randint(-77,77),randint(-77,77)]
+		return velocidade
+		
+class Particle():	
+	velocidade=[0,0]
+	posicao=[0,0]
+	def _init_(self):
+		self.posicao=xy
+		self.fitnes=0
+		self.velocidade=[0,0]
+	def movimenta(self):
+		self.posicao = self.posicao + self.velocidade
+		
+	def printaposicao(self):
+		print("%d %d",self.posicao[0],self.posicao[1])	
+	
+def inicializa_P(particles,v):
+	lista=[particles]
+	print("aqui")
+	for i in range(particles):
+		xy[0]=randint(-512,512)
+		xy[1]=randint(-512,512)
+		p=Particle()
+		print("aqui")
+		p.velocidade[0]=v[0]
+		p.velocidade[1]=v[1]
+		p.printaposicao
+		lista.append(p)
+	return lista		
+		
+		                              
 def main(args):
 	
 	P = int(args[1])#Número de partículas
 	iterations=int(args[2])#Número de interações
 	
 	list_P = [P]
+	v=gera_velocidade()
+	list_P=inicializa_P(P,v)
+	print("aqui")
 	
-	list_P=inicializa_P(P)
 	
 	
-	
-	for i in range(P):
-		
-		print(list_P[i])
-	
+	#for i in range(P):
+		#print(list_P[i].printaposicao)
+		#list_P[i].printaposicao(list_P[i])
+
 	return 0
 
 if __name__ == '__main__':
-    import sys
-    sys.exit(main(sys.argv))
+	import sys
+	sys.exit(main(sys.argv))
