@@ -2,12 +2,10 @@ import random
 import numpy as np
 import math
 
-W=0.9
 c1 = 2.5
 c2 = 2.5
 
 n_iterations = int(input("Inform the number of iterations: "))
-target_error = float(input("Inform the target error: "))
 n_particles = int(input("Inform the number of particles: "))
 
 
@@ -22,31 +20,24 @@ class Particle():
 
     def move(self):
         caminha = self.position + self.velocity
-        if caminha[0] > 512:
-            caminha[0] = 512
-            self.velocity[0] = 0
-        if caminha[0] > -512:
-            caminha[0] = -512
-            self.velocity[0] = 0
-        if caminha[1] > 512:
-            caminha[1] = 512
-            self.velocity[1] = 0
-        if caminha[1] > -512:
-            caminha[1] = -512
-            self.velocity[1] = 0
+        for i in range(len(caminha)):
+            if caminha[i] > 512:
+                caminha[i] = 512
+                self.velocity = (0,0)
+            elif caminha[i] < -512:
+                caminha[i] = -512
+                self.velocity = (0,0)
 
         self.position = caminha
 
 
 class Space():
 
-    def __init__(self, target, target_error, n_particles):
-        self.target = target
-        self.target_error = target_error
+    def __init__(self, n_particles):
         self.n_particles = n_particles
         self.particles = []
         self.gbest_value = float('inf')
-        self.gbest_position = np.array([random.random() * 50, random.random() * 50])
+        self.gbest_position = np.array([0,0])
 
     def print_particles(self):
         for particle in self.particles:
@@ -75,36 +66,29 @@ class Space():
                 self.gbest_value = best_fitness_cadidate
                 self.gbest_position = particle.position
 
-    def move_particles(self):
+    def move_particles(self,W):
 
         for particle in self.particles:
+            print("particle velocity: {}".format(particle.velocity))
+            a = W * particle.velocity
+            b = c1 * random.uniform(0, 1)
+            c = (particle.pbest_position - particle.position)
+            d = c2 * random.uniform(0, 1)
+            e = (self.gbest_position - particle.position)
 
-            print("(W * particle.velocity) = {}".format((W * particle.velocity)))
-            print("((c1 * random.random())) = {}".format(c1 * random.random()))
-            print("(particle.pbest_position - particle.position) = {}".format(
-                particle.pbest_position - particle.position))
-            print("(random.random() * c2) = {}".format(random.random() * c2))
-            print("(self.gbest_position - particle.position) = {}".format(self.gbest_position - particle.position))
-
-            new_velocity = (W * particle.velocity) + (c1 * random.random()) * (
-                        (particle.pbest_position - particle.position) + (random.random() * c2) * (
-                            self.gbest_position - particle.position))
-            print("AQUIIIIIIIIIIIIIIIIII: {}".format(new_velocity))
-            if (new_velocity[0] > 77):
-                new_velocity[0] = 77
-            if (new_velocity[0] < (-77)):
-                new_velocity[0] = -77
-            if (new_velocity[1] > 77):
-                new_velocity[1] = 77
-            if (new_velocity[1] < (-77)):
-                new_velocity[1] = -77
+            new_velocity =  a + b * c + d * e
+            for i in range(len(new_velocity)):
+                if (new_velocity[i] > 77):
+                    new_velocity[i] = 77
+                elif (new_velocity[i] < -77):
+                    new_velocity[i] = -77
 
             particle.velocity = new_velocity
             particle.move()
 
 
-search_space = Space(1, target_error, n_particles)
-particles_vector = [Particle() for _ in range(search_space.n_particles)]
+search_space = Space(n_particles)
+particles_vector = [Particle() for _ in range(search_space.n_particles)] # criando uma particula para n particulas
 search_space.particles = particles_vector
 search_space.print_particles()
 
@@ -113,12 +97,8 @@ while (iteration < n_iterations):
     search_space.set_pbest()
     search_space.set_gbest()
     W = 0.9 - (iteration * ((0.9 - 0.4) / n_iterations))
-    if (abs(search_space.gbest_value - search_space.target) <= search_space.target_error):
-        #condição de parada
-        break
-
-    search_space.move_particles()
+    search_space.move_particles(W)
     iteration += 1
 
 # f(512,404.2319) = -959.6407
-print("The best solution is: {} in n_iterations: {}".format(search_space.gbest_position,iteration))
+print("The best solution is: {} in n_iterations: {} | result: {}".format(search_space.gbest_position,iteration,search_space.gbest_value))
