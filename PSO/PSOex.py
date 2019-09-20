@@ -23,10 +23,10 @@ class Particle():
         for i in range(len(caminha)):
             if caminha[i] > 512:
                 caminha[i] = 512
-                self.velocity = (0,0)
+                self.velocity = np.array([float(0.0),float(0.0)])
             elif caminha[i] < -512:
                 caminha[i] = -512
-                self.velocity = (0,0)
+                self.velocity = np.array([float(0.0),float(0.0)])
 
         self.position = caminha
 
@@ -69,7 +69,7 @@ class Space():
     def move_particles(self,W):
 
         for particle in self.particles:
-            print("particle velocity: {}".format(particle.velocity))
+            # print("particle velocity: {}".format(particle.velocity))
             a = W * particle.velocity
             b = c1 * random.uniform(0, 1)
             c = (particle.pbest_position - particle.position)
@@ -78,10 +78,10 @@ class Space():
 
             new_velocity =  a + b * c + d * e
             for i in range(len(new_velocity)):
-                if (new_velocity[i] > 77):
-                    new_velocity[i] = 77
-                elif (new_velocity[i] < -77):
-                    new_velocity[i] = -77
+                if (new_velocity[i] > 77.0):
+                    new_velocity[i] = 77.0
+                elif (new_velocity[i] < -77.0):
+                    new_velocity[i] = -77.0
 
             particle.velocity = new_velocity
             particle.move()
