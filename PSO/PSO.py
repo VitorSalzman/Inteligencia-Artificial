@@ -1,95 +1,108 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  PSO.py
-#  
-#  Copyright 2019 20161BSI0403 <20161BSI0403@SR6733>
-#  
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#  
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#  
-#  You should have received a copy of the GNU General Public License
-#  along with this program; if not, write to the Free Software
-#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-#  MA 02110-1301, USA.
-#  
-#  
+import random
+import numpy as np
+import math
 
-from random import randint
-
-	
-xy=[0,0]	
-	
-"""
 class Particle():
     def __init__(self):
         self.position = np.array([(-1) ** (bool(random.getrandbits(1))) * random.random() * 512,
                                   (-1) ** (bool(random.getrandbits(1))) * random.random() * 512])
         self.pbest_position = self.position
         self.pbest_value = float('inf')
-        self.velocity = np.array([0, 0])
+        self.velocity = np.array([(-1) ** (bool(random.getrandbits(1))) * random.random() * 77,
+                                  (-1) ** (bool(random.getrandbits(1))) * random.random() * 77])
 
     def move(self):
-        self.position = self.position + self.velocity
-"""
+        caminha = self.position + self.velocity
+        for i in range(len(caminha)):
+            if caminha[i] > 512:
+                caminha[i] = 512
+                self.velocity = np.array([float(0.0),float(0.0)])
+            elif caminha[i] < -512:
+                caminha[i] = -512
+                self.velocity = np.array([float(0.0),float(0.0)])
 
-def gera_velocidade():
-		velocidade=[randint(-77,77),randint(-77,77)]
-		return velocidade
-		
-class Particle():	
-	velocidade=[0,0]
-	posicao=[0,0]
-	def _init_(self):
-		self.posicao=xy
-		self.fitnes=0
-		self.velocidade=[0,0]
-	def movimenta(self):
-		self.posicao = self.posicao + self.velocidade
-		
-	def printaposicao(self):
-		print("%d %d",self.posicao[0],self.posicao[1])	
-	
-def inicializa_P(particles,v):
-	lista=[particles]
-	print("aqui")
-	for i in range(particles):
-		xy[0]=randint(-512,512)
-		xy[1]=randint(-512,512)
-		p=Particle()
-		print("aqui")
-		p.velocidade[0]=v[0]
-		p.velocidade[1]=v[1]
-		p.printaposicao
-		lista.append(p)
-	return lista		
-		
-		                              
-def main(args):
-	
-	P = int(args[1])#Número de partículas
-	iterations=int(args[2])#Número de interações
-	
-	list_P = [P]
-	v=gera_velocidade()
-	list_P=inicializa_P(P,v)
-	print("aqui")
-	
-	
-	
-	#for i in range(P):
-		#print(list_P[i].printaposicao)
-		#list_P[i].printaposicao(list_P[i])
+        self.position = caminha
 
-	return 0
 
-if __name__ == '__main__':
-	import sys
-	sys.exit(main(sys.argv))
+class Space():
+
+    def __init__(self, n_particles):
+        self.n_particles = n_particles
+        self.particles = []
+        self.gbest_value = float('inf')
+        self.gbest_position = np.array([0,0])
+
+    def print_particles(self):
+        for particle in self.particles:
+            print("I am at {} my pbest is {} and my fitness is {}".format(particle.position,particle.pbest_position,self.fitness(particle)))
+
+    def fitness(self, particle):
+        x = particle.position[0]
+        y = particle.position[1]
+
+        a = -(y + 47)
+        b = math.sin( (abs((x/2) + (y+47)))**(1/2) )
+        c = x * math.sin( (abs(x - (y+47)))**(1/2))
+        return a*b-c
+
+    def set_pbest(self):
+        for particle in self.particles:
+            fitness_cadidate = self.fitness(particle)
+            if (particle.pbest_value > fitness_cadidate):
+                particle.pbest_value = fitness_cadidate
+                particle.pbest_position = particle.position
+
+    def set_gbest(self):
+        for particle in self.particles:
+            best_fitness_cadidate = self.fitness(particle)
+            if (self.gbest_value > best_fitness_cadidate):
+                self.gbest_value = best_fitness_cadidate
+                self.gbest_position = particle.position
+
+    def move_particles(self,W):
+
+        for particle in self.particles:
+            # print("particle velocity: {}".format(particle.velocity))
+            a = W * particle.velocity
+            b = c1 * random.uniform(0, 1)
+            c = (particle.pbest_position - particle.position)
+            d = c2 * random.uniform(0, 1)
+            e = (self.gbest_position - particle.position)
+
+            new_velocity =  a + b * c + d * e
+            for i in range(len(new_velocity)):
+                if (new_velocity[i] > 77.0):
+                    new_velocity[i] = 77.0
+                elif (new_velocity[i] < -77.0):
+                    new_velocity[i] = -77.0
+
+            particle.velocity = new_velocity
+            particle.move()
+
+
+c1 = 2.5
+c2 = 2.5
+
+all_interations = [20,50,100]
+all_particles = [50,100]
+
+for n_iterations in all_interations:
+    for n_particles in all_particles:
+        # n_iterations = int(input("Inform the number of iterations: "))
+        # n_particles = int(input("Inform the number of particles: "))
+
+        search_space = Space(n_particles)
+        particles_vector = [Particle() for _ in range(search_space.n_particles)] # criando uma particula para n particulas
+        search_space.particles = particles_vector
+        # search_space.print_particles()
+
+        iteration = 0
+        while (iteration < n_iterations):
+            search_space.set_pbest()
+            search_space.set_gbest()
+            W = 0.9 - (iteration * ((0.9 - 0.4) / n_iterations))
+            search_space.move_particles(W)
+            iteration += 1
+
+        # f(512,404.2319) = -959.6407
+        print("The best solution is: {} in n_iterations: {}  and particles: {} | result: {}".format(search_space.gbest_position,iteration,n_particles,search_space.gbest_value))
