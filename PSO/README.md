@@ -22,8 +22,10 @@ As fórmulas para a velocidade e o deslocamento são as seguintes: (inserir link
 ### Problema  <br>
 
 O problema proposto é a otimização por enxame de partículas, de uma função fitness, descrita a seguir, como a função Eggholder, que é uma função clássica na condução de testes para otimização de funções.<br>
-(inserir a imagem 2 aqui) <br><br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/ProblemaProposto.PNG"> <br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/1_Formulas.png"> 
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/2_Fittness.png">
+<br><br>
+
 
 ### Implementação<br>
 O código foi subdividido em área global, estrutura de dados e funções gerais.<br>
@@ -57,17 +59,28 @@ Foram feitas 10 execuções do programa, para cada parâmetro utilizado, explica
 <li> 100 interações, com 50 partículas;</li>
 <li> 100 interações, com 100 partículas;</li>
 
-O mapa do problema, apresenta uma matriz 10x10, representado por <b>zeros e um's</b>, sendo 0 como <b>estado livre</b>, e 1 como <b>Obstáculo</b>. A seguir, um teste realizado com a posição inicial de 0,0, e a posição final 8,8, tendo início em <b>S</b>, e fim em <b>E</b>.<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/caminhoPadraoTracejado.png"><br><br>
+Para 20 interações, e 50 partículas, a média resultante foi: <b>-893,7514203188810</b>. Os detalhes estão na tabela a seguir.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/20_50.PNG"> <br><br>
 
-Parametrizando o código, foi testado com a posição inicial em 0,9, e a final em 9,0:<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/caminhoParametrizadoTracejado.png"><br><br>
+Para 20 interações, e 100 partículas, a média resultante teve o <b> melhor resultado</b>, que foi: <b>-927,1075347559100</b>. Os detalhes estão na tabela a seguir.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/20_100.PNG"> <br><br>
 
-Testamos com dimensões que extrapolam o domínio do problema:<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/DimensoesIncorretas.png"><br><br>
+Para 50 interações, e 50 partículas, a média resultante foi: <b>-786,5252680885200</b>. Os detalhes estão na tabela a seguir.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/50_50.PNG"> <br><br>
 
-Testamos, também, com dimensões que colidem com obstáculos no mapa:<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/Colisao.png"><br><br>
+Para 50 interações, e 100 partículas, a média resultante teve o <b>pior resultado</b>, que foi: <b>-786,5254143025010</b>. Os detalhes estão na tabela a seguir.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/50_100.PNG"> <br><br>
+
+Para 100 interações, e 50 partículas, a média resultante foi: <b>-891,7640119973470</b>. Os detalhes estão na tabela a seguir.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/100_50.PNG"> <br><br>
+
+Para 100 interações, e 100 partículas, a média resultante foi: <b>-857,8876806216580</b>. Os detalhes estão na tabela a seguir.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/100_100.PNG"> <br><br>
+
+<b>Por fim, conclui-se que o algoritmo PSO, executado para vinte interações, produziu os melhores resultados(Sendo destes, obteve-se melhora ainda maior com 100 partículas), enquanto a execução do algoritmo para 50 interações, produziu os piores resultados(Sendo destes, obteve-se valores ainda menores com 100 partículas). Os resultados voltaram a crescer, com a execução em 100 interações.</b>
+
+
+
 
 ### Referências bibliográficas<br>
 <li>http://pointclouds.org/documentation/tutorials/kdtree_search.php#kdtree-search</li><br>
