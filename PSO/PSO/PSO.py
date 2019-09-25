@@ -62,7 +62,7 @@ class Space():
     def move_particles(self,W):
 
         for particle in self.particles:
-            # print("particle velocity: {}".format(particle.velocity))
+            
             a = W * particle.velocity
             b = c1 * random.uniform(0, 1)
             c = (particle.pbest_position - particle.position)
