@@ -5,26 +5,34 @@ Vitor Soares Salzman - 20161bsi0403 - vitor-salzman96@hotmail.com<br>
 Luiz Antonio Roque Guzzo - 20151bsi0193 - luizguzzo@gmail.com<br>
 
 
-## Relatório - Implementação do A*<br>
+## Relatório - Implementação do PSO<br>
 
 ### Especificação<br>
-Nesse relatório, vamos explicar o conceito do algoritmo de busca A*, bem como uma implementação detalhada, e seus resultados<br>
+Nesse relatório, vamos explicar o conceito do algoritmo de otimização por enxame de partículas, o PSO, bem como uma implementação detalhada, e seus resultados<br>
 
 ### Conceito<br>
-Esse algoritmo é a combinação de aproximações heurísticas, como do algoritmo de busca em largura e do algoritmo de Dijkstra (1959). O algoritmo de Dijkstra basicamente visava solucionar os problemas de caminho mais curto.  A principal diferença entre ele e o algoritmo A* é a ausência de uma função heurística que facilite e diminua o número de nós expandidos, pois a cada passo o algoritmo de  Dijkstra verificaria os nós adjacentes para efetuar a avaliação, sem se importar com uma ordem ou priorização dos ramos, o que acontece no algoritmo A* devido a utilização da função heurística determinada pelo problema. Hoje em dia,  já existem muitas outras variantes do algoritmo A* proposto originalmente. Ele avalia os nós através da combinação de g(n) que é o custo para alcançar cada nó com a função h(n) que é o menor custo partindo da origem para se chegar ao destino, matematicamente dado na equação 1:<br>
+A otimização por enxame de partículas é outro algoritmo que foi criado com base em comportamentos da natureza. Esse algoritmo é baseado em uma estratégia inspirada no voo dos pássaros e movimento de cardumes de peixes. Permite a otimização global de uma função, utilizando um chamado "enxame de partículas". A movimentação dessas partículas é feito dentro do escopo do problema. Dentro de sua estratégia, as "N" partículas se movimentam da seguinte forma: <br>
+<li> Cada partícula é um ponto mapeado, pertencente ao escopo do caso; </li>
+<li> Cada partícula representa uma solução potencial; </li>
+<li> De forma a obedecer uma função objetivo, e a uma velocidade calculada.</li><br>
+As fórmulas para a velocidade e o deslocamento são as seguintes: (inserir link da imagem)<br>
 
-<b> f(n) = g(n) + h(n) (1) </b><br>
 
-Desse modo f(n) é, portanto, o custo estimado da solução de custo mais baixo passando por n. Esta técnica requer que a estimação do custo restante no próximo nó não seja nunca maior que o custo restante do nó anterior. Diferente do Dijkstra,  sob esta hipótese, sempre é possível encontrar a solução ótima com a busca A*.<br>
 
 ### Problema  <br>
 
-O problema proposto é o caminho descrito na figura a seguir, onde um objeto precisa caminhar verticalmente/horizontalmente do ponto inicial, até o ponto final, sem que este colida com os obstáculos(em preto). O algoritmo deve ser capaz de definir o melhor caminho, de acordo com a heurística recebida.<br>
+O problema proposto é a otimização por enxame de partículas, de uma função fitness, descrita a seguir, como a função Eggholder, que é uma função clássica na condução de testes para otimização de funções.<br>
+(inserir a imagem 2 aqui) <br><br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/ProblemaProposto.PNG"> <br><br>
 
 ### Implementação<br>
-O trecho a seguir, recebe parâmetros de linha e coluna e, de acordo com o estado representado, calcula os estados sucessores com peso 1 à frente.<br><br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/EncontraEstadosSucessores.PNG"> <br><br>
+Foram feitas 10 execuções do programa, para cada parâmetro utilizado, explicado a seguir:<br>
+<li> 20 interações, com 50 partículas;</li>
+<li> 20 interações, com 100 partículas;</li>
+<li> 50 interações, com 50 partículas;</li>
+<li> 50 interações, com 100 partículas;</li>
+<li> 100 interações, com 50 partículas;</li>
+<li> 100 interações, com 100 partículas;</li>
 
 A função "verificaObstaculo" retorna <b>True</b>, caso as dimensões passadas por parâmetro sejam válidas(valor de linha e coluna devem pertencer ao tamanho da Matriz, além de não coincidirem com algum obstáculo). Caso contrário, retorna <b>False</b><br>
 
