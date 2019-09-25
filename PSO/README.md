@@ -26,6 +26,29 @@ O problema proposto é a otimização por enxame de partículas, de uma função
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/ProblemaProposto.PNG"> <br><br>
 
 ### Implementação<br>
+O código foi subdividido em área global, estrutura de dados e funções gerais.<br>
+
+A estrutura de dados <b>Particle</b>, armazena em seu interior, a posição X e Y da partícula(de imediato, é setado um valor aleatório dentro do escopo do trabalho), o valor e posição do pbest da partícula, e o vetor de velocidade. A função <b>move</b> desloca a partícula de acordo com o valor da velocidade.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/1_cod.PNG"> <br><br>
+
+A função <b>fitness</b> calcula a função do escopo do problema, para os valores x e y.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/2_cod.PNG"> <br><br>
+
+As funções <b>set_pbest e set_gbest</b> realizam o cálculo do pbest e gbest, de acordo com o andamento do algoritmo.<br> <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/3_cod.PNG"> <br><br>
+
+A função <b>move_particles</b> realiza o cálculo da velocidade, por partes, e no fim, chama a função da partícula, para movimentá-la(quando a velocidade ultrapassa o escopo definido(15% de 512), o valor é definido para o limite do escopo(77 ou -77).<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/4_cod.PNG"> <br><br>
+
+O loop a seguir, é o loop principal, que só terminará a execução quando o número de interações definidas for atingida. Dentro do loop, o W é calculado a cada interação.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/5_cod.PNG"> <br><br>
+
+
+O código completo encontra-se em https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/PSO/PSO.py. <br>
+
+   
+
+### Resultados<br>
+
 Foram feitas 10 execuções do programa, para cada parâmetro utilizado, explicado a seguir:<br>
 <li> 20 interações, com 50 partículas;</li>
 <li> 20 interações, com 100 partículas;</li>
@@ -34,24 +57,6 @@ Foram feitas 10 execuções do programa, para cada parâmetro utilizado, explica
 <li> 100 interações, com 50 partículas;</li>
 <li> 100 interações, com 100 partículas;</li>
 
-A função "verificaObstaculo" retorna <b>True</b>, caso as dimensões passadas por parâmetro sejam válidas(valor de linha e coluna devem pertencer ao tamanho da Matriz, além de não coincidirem com algum obstáculo). Caso contrário, retorna <b>False</b><br>
-
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/EncontraEstadosSucessores.PNG"> <br><br>
-
-Este trecho calcula o peso da distância de um estado, até o estado final, ou seja, o objetivo.<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/CalculaDistanciaMeta.png"><br><br>
-
-De acordo com a "margem"(estados que contornam o estado atual) e a heurística(h=f+g), calcula-se o estado mais promissor.<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/EncontraEstadoPromissor.png"><br><br>
-
-Esse loop controla todas as iterações do código. A cada tentativa de caminho, uma iteração é adicionada.<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/Tentativas.png"><br><br>
-
-O código completo encontra-se em https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/busca_a/busca_a.py. <br>
-
-   
-
-### Resultados<br>
 O mapa do problema, apresenta uma matriz 10x10, representado por <b>zeros e um's</b>, sendo 0 como <b>estado livre</b>, e 1 como <b>Obstáculo</b>. A seguir, um teste realizado com a posição inicial de 0,0, e a posição final 8,8, tendo início em <b>S</b>, e fim em <b>E</b>.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/caminhoPadraoTracejado.png"><br><br>
 
