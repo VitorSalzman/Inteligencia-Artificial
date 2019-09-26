@@ -1,6 +1,7 @@
 import random
 import numpy as np
 import math
+import csv
 
 class Particle():
     def __init__(self):
@@ -85,24 +86,35 @@ c2 = 2.5
 
 all_interations = [20,50,100]
 all_particles = [50,100]
+exec = 10
 
 for n_iterations in all_interations:
     for n_particles in all_particles:
-        # n_iterations = int(input("Inform the number of iterations: "))
-        # n_particles = int(input("Inform the number of particles: "))
 
-        search_space = Space(n_particles)
-        particles_vector = [Particle() for _ in range(search_space.n_particles)] # criando uma particula para n particulas
-        search_space.particles = particles_vector
-        # search_space.print_particles()
+        tabela = []
+        for e in range(exec):
 
-        iteration = 0
-        while (iteration < n_iterations):
-            search_space.set_pbest()
-            search_space.set_gbest()
-            W = 0.9 - (iteration * ((0.9 - 0.4) / n_iterations))
-            search_space.move_particles(W)
-            iteration += 1
+            linha = []
+            search_space = Space(n_particles)
+            particles_vector = [Particle() for _ in range(search_space.n_particles)] # criando uma particula para n particulas
+            search_space.particles = particles_vector
+            # search_space.print_particles()
 
-        # f(512,404.2319) = -959.6407
-        print("The best solution is: {} in n_iterations: {}  and particles: {} | result: {}".format(search_space.gbest_position,iteration,n_particles,search_space.gbest_value))
+            iteration = 0
+            while (iteration < n_iterations):
+                search_space.set_pbest()
+                search_space.set_gbest()
+                W = 0.9 - (iteration * ((0.9 - 0.4) / n_iterations))
+                search_space.move_particles(W)
+                # print("gBest{}: {}".format(iteration,search_space.gbest_value))
+                linha.append(search_space.gbest_value)
+                iteration += 1
+
+            tabela.append(linha)
+            # f(512,404.2319) = -959.6407
+            # print("The best solution is: {} in n_iterations: {}  and particles: {} | result: {}".format(search_space.gbest_position,iteration,n_particles,search_space.gbest_value))
+
+        with open('tabela_i{}_p{}.csv'.format(n_iterations,n_particles),'w',newline='') as csvfile:
+            spamwriter = csv.writer(csvfile,delimiter=';')
+            for linha in tabela:
+                spamwriter.writerow(linha)
