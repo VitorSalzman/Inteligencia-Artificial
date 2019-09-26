@@ -84,7 +84,7 @@ Para 100 interações, e 50 partículas, a média resultante foi: <b>-891,764011
 
 Para 100 interações, e 100 partículas, a média resultante foi: <b>-857,8876806216580</b>. Os detalhes estão na tabela a seguir.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/100_100.PNG"> <br><br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/graph_100_100.PNG"> <br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/graph_100_100.png"> <br>
 
 <b>Por fim, conclui-se que o algoritmo PSO, executado para vinte interações, produziu os melhores resultados(Sendo destes, obteve-se melhora ainda maior com 100 partículas), enquanto a execução do algoritmo para 50 interações, produziu os piores resultados(Sendo destes, obteve-se valores ainda menores com 100 partículas). Os resultados voltaram a crescer, com a execução em 100 interações.</b>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/modelo_3d.jfif"> <br>
