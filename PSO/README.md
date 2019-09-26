@@ -92,7 +92,12 @@ Para 100 interações, e 100 partículas, a média resultante foi: <b>-857,88768
 
 
 
+
 ### Referências bibliográficas<br>
 <li>http://pointclouds.org/documentation/tutorials/kdtree_search.php#kdtree-search</li><br>
 <li>http://repositorio.roca.utfpr.edu.br/jspui/bitstream/1/10221/1/PG_COELE_2018_1_03.pdf</li><br>
 <li>https://github.com/felipemartinsss/RepositorioIAsc/tree/master/Python/buscas</li><br>
+
+
+Link do grafico 3D:
+https://www.monroecc.edu/faculty/paulseeburger/calcnsf/CalcPlot3D/?type=z;z=-(y+47)sen(sqrt(abs((x)/(2)+y+47)))-x*sen(sqrt(abs(x-(y+47))));visible=true;umin=-512;umax=512;vmin=-512;vmax=512;grid=30;format=normal;alpha=-1;constcol=rgb(255,0,0);view=0;contourcolor=red;fixdomain=false&type=point;point=(512,404,-959);visible=true;color=rgb(255,0,0);size=4&type=point;point=(-457,-382,-786);visible=true;color=rgb(0,0,0);size=4&type=point;point=(283,-487,-718);visible=true;color=rgb(0,0,0);size=4&type=point;point=(347,499,-888);visible=true;color=rgb(0,0,0);size=4&type=point;point=(-465,385,-894);visible=true;color=rgb(0,0,0);size=4&type=point;point=(465,385,-894);visible=true;color=rgb(255,153,0);size=4&type=point;point=(-456,-382,-786);visible=true;color=rgb(0,0,0);size=4&type=point;point=(-456,382,-786);visible=true;color=rgb(0,0,0);size=4&type=window;hsrmode=0;nomidpts=false;anaglyph=-1;center=-3.4882998285241524,8.355103812971555,4.2454687115529115,1;focus=0,0,0,1;up=0.4540262477877348,-0.24563377062836095,0.856460283402963,1;transparent=true;alpha=140;twoviews=false;unlinkviews=false;axisextension=0.7;xaxislabel=x;yaxislabel=y;zaxislabel=z;edgeson=true;faceson=true;showbox=true;showaxes=true;showticks=true;perspective=true;centerxpercent=0.4596357371400438;centerypercent=0.439485627836611;rotationsteps=30;autospin=true;xygrid=false;yzgrid=false;xzgrid=false;gridsonbox=false;gridplanes=false;gridcolor=rgb(128,128,128);xmin=-512;xmax=512;ymin=-512;ymax=512;zmin=-512;zmax=512;xscale=256;yscale=256;zscale=256;zcmin=-1024;zcmax=1024;zoom=0.002328;xscalefactor=1;yscalefactor=1;zscalefactor=1
