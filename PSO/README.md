@@ -61,26 +61,26 @@ Foram feitas 10 execuções do programa, para cada parâmetro utilizado, explica
 
 Para 20 interações, e 50 partículas, a média resultante foi: <b>-893,7514203188810</b>. Os detalhes estão na tabela a seguir.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/20_50.PNG"> <br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/graph_20_50.PNG"> <br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/graph_20_50.png"> <br>
 
 
 
 
 Para 20 interações, e 100 partículas, a média resultante teve o <b> melhor resultado</b>, que foi: <b>-927,1075347559100</b>. Os detalhes estão na tabela a seguir.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/20_100.PNG"> <br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/graph_20_100.PNG"> <br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/graph_20_100.png"> <br><br>
 
 Para 50 interações, e 50 partículas, a média resultante foi: <b>-786,5252680885200</b>. Os detalhes estão na tabela a seguir.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/50_50.PNG"> <br><br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/graph_50_50.PNG"> <br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/graph_50_50.png"> <br>
 
 Para 50 interações, e 100 partículas, a média resultante teve o <b>pior resultado</b>, que foi: <b>-786,5254143025010</b>. Os detalhes estão na tabela a seguir.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/50_100.PNG"> <br><br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/graph_50_100.PNG"> <br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/graph_50_100.png"> <br>
 
 Para 100 interações, e 50 partículas, a média resultante foi: <b>-891,7640119973470</b>. Os detalhes estão na tabela a seguir.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/100_50.PNG"> <br><br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/graph_100_50.PNG"> <br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/graph_100_50.png"> <br>
 
 Para 100 interações, e 100 partículas, a média resultante foi: <b>-857,8876806216580</b>. Os detalhes estão na tabela a seguir.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/100_100.PNG"> <br><br>
