@@ -60,29 +60,41 @@ Foram feitas 10 execuções do programa, para cada parâmetro utilizado, explica
 <li> 100 interações, com 100 partículas;</li>
 
 Para 20 interações, e 50 partículas, a média resultante foi: <b>-893,7514203188810</b>. Os detalhes estão na tabela a seguir.<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/20_50.PNG"> <br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/20_50.PNG"> <br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/graph_20_50.png"> <br>
+
+
+
 
 Para 20 interações, e 100 partículas, a média resultante teve o <b> melhor resultado</b>, que foi: <b>-927,1075347559100</b>. Os detalhes estão na tabela a seguir.<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/20_100.PNG"> <br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/20_100.PNG"> <br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/graph_20_100.png"> <br><br>
 
 Para 50 interações, e 50 partículas, a média resultante foi: <b>-786,5252680885200</b>. Os detalhes estão na tabela a seguir.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/50_50.PNG"> <br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/graph_50_50.png"> <br>
 
 Para 50 interações, e 100 partículas, a média resultante teve o <b>pior resultado</b>, que foi: <b>-786,5254143025010</b>. Os detalhes estão na tabela a seguir.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/50_100.PNG"> <br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/graph_50_100.png"> <br>
 
 Para 100 interações, e 50 partículas, a média resultante foi: <b>-891,7640119973470</b>. Os detalhes estão na tabela a seguir.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/100_50.PNG"> <br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/graph_100_50.png"> <br>
 
 Para 100 interações, e 100 partículas, a média resultante foi: <b>-857,8876806216580</b>. Os detalhes estão na tabela a seguir.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/100_100.PNG"> <br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/graph_100_100.png"> <br>
 
 <b>Por fim, conclui-se que o algoritmo PSO, executado para vinte interações, produziu os melhores resultados(Sendo destes, obteve-se melhora ainda maior com 100 partículas), enquanto a execução do algoritmo para 50 interações, produziu os piores resultados(Sendo destes, obteve-se valores ainda menores com 100 partículas). Os resultados voltaram a crescer, com a execução em 100 interações.</b>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/PSO/Imagens/modelo_3d.jfif"> <br>
+
 
 
 
 
 ### Referências bibliográficas<br>
-<li>http://pointclouds.org/documentation/tutorials/kdtree_search.php#kdtree-search</li><br>
-<li>http://repositorio.roca.utfpr.edu.br/jspui/bitstream/1/10221/1/PG_COELE_2018_1_03.pdf</li><br>
+<li>http://www.eng.uerj.br/~nadia/pso.pdf</li><br>
 <li>https://github.com/felipemartinsss/RepositorioIAsc/tree/master/Python/buscas</li><br>
+Link do grafico 3D:
+https://www.monroecc.edu/faculty/paulseeburger/calcnsf/CalcPlot3D/?type=z;z=-(y+47)sen(sqrt(abs((x)/(2)+y+47)))-x*sen(sqrt(abs(x-(y+47))));visible=true;umin=-512;umax=512;vmin=-512;vmax=512;grid=30;format=normal;alpha=-1;constcol=rgb(255,0,0);view=0;contourcolor=red;fixdomain=false&type=point;point=(512,404,-959);visible=true;color=rgb(255,0,0);size=4&type=point;point=(-457,-382,-786);visible=true;color=rgb(0,0,0);size=4&type=point;point=(283,-487,-718);visible=true;color=rgb(0,0,0);size=4&type=point;point=(347,499,-888);visible=true;color=rgb(0,0,0);size=4&type=point;point=(-465,385,-894);visible=true;color=rgb(0,0,0);size=4&type=point;point=(465,385,-894);visible=true;color=rgb(255,153,0);size=4&type=point;point=(-456,-382,-786);visible=true;color=rgb(0,0,0);size=4&type=point;point=(-456,382,-786);visible=true;color=rgb(0,0,0);size=4&type=window;hsrmode=0;nomidpts=false;anaglyph=-1;center=-3.4882998285241524,8.355103812971555,4.2454687115529115,1;focus=0,0,0,1;up=0.4540262477877348,-0.24563377062836095,0.856460283402963,1;transparent=true;alpha=140;twoviews=false;unlinkviews=false;axisextension=0.7;xaxislabel=x;yaxislabel=y;zaxislabel=z;edgeson=true;faceson=true;showbox=true;showaxes=true;showticks=true;perspective=true;centerxpercent=0.4596357371400438;centerypercent=0.439485627836611;rotationsteps=30;autospin=true;xygrid=false;yzgrid=false;xzgrid=false;gridsonbox=false;gridplanes=false;gridcolor=rgb(128,128,128);xmin=-512;xmax=512;ymin=-512;ymax=512;zmin=-512;zmax=512;xscale=256;yscale=256;zscale=256;zcmin=-1024;zcmax=1024;zoom=0.002328;xscalefactor=1;yscalefactor=1;zscalefactor=1
