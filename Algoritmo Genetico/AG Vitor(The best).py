@@ -23,19 +23,43 @@
 #  
 from random import randint
 
+	
+def conversor_b_d(vet):
+	soma=0
+	for i in range(len(vet)):
+		if vet[len(vet)-i-1]==1: 
+			soma += 2**i
+	return soma
+	
 class Cromossomo():
 	
-    def __init__(self):
-        self.bits=[0,0,0,0,0,0,0,0,0,0]
-        self.normalizado=0
-        self.aptidao=0
-       
-	def gera_vetor_bits(self)
+	def __init__(self):
+		self.bits=[0,0,0,0,0,0,0,0,0,0]
+		self.normalizado=0
+		self.aptidao=0
+	
+	def gera_vetor_bits(self):
+		newcromo=[]
 		for i in range(len(self.bits)):
-			self.bits[i] = randint(0,1)
-       
-       
+			newcromo.append(randint(0,1))
+		return newcromo
+	'''def normaliza(self):
+		vet=self.bits
+		decimal=conversor_b_d(vet)
+		return decimal'''
+		
+		
+		
+vetor_cromossomos= [Cromossomo() for _ in range(10)] # criando 10 cromossomos
+cromo = Cromossomo()
+for i in vetor_cromossomos:
+	i.bits=i.gera_vetor_bits()
+	#i.normalizado=i.normaliza()
+	print(i.bits)
+print("teste binario decimal")
+	
+print(conversor_b_d(vetor_cromossomos[0].bits))	
+print(conversor_b_d([1,0,0,0,1,0,1,1,1,0,1,1,0,1,0,1,0,0,0,1,1,1]))	#teste vetor do slide
+   
 
-if __name__ == '__main__':
-    import sys
-    sys.exit(main(sys.argv))
+
