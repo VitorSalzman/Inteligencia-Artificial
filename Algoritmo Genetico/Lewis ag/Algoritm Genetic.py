@@ -54,7 +54,7 @@ for generation in range(num_generations):
     print("Best result : ", numpy.max(numpy.sum(new_population*equation_inputs, axis=1)))
 
 # Getting the best solution after iterating finishing all generations.
-#At first, the fitness is calculated for each solution in the final generation.
+#At first, the fitness is calculated for each solution inthe final generation.
 fitness = ga.cal_pop_fitness(equation_inputs, new_population)
 # Then return the index of that solution corresponding to the best fitness.
 best_match_idx = numpy.where(fitness == numpy.max(fitness))
