@@ -22,6 +22,8 @@
 #  
 #  
 from random import randint
+import math
+
 
 def mutation(vetCromo):
     for cromo in vetCromo:
@@ -29,62 +31,91 @@ def mutation(vetCromo):
 
 
 def conversor_b_d(vet):
-    soma=0
+    soma = 0
     for i in range(len(vet)):
-        if vet[len(vet)-i-1]==1:
-            soma += 2**i
+        if vet[len(vet) - i - 1] == 1:
+            soma += 2 ** i
     return soma
+
 
 def normaliza(vet):
     b10 = conversor_b_d(vet)
-    l=len(vet)
+    l = len(vet)
     minimo = -20.0
     maximo = 20.0
-    x = minimo +( maximo - minimo) *(b10/((2**l)-1))
+    x = minimo + (maximo - minimo) * (b10 / ((2 ** l) - 1))
     return x
+
+
+def calc_aptidao(x):
+    cos = math.cos(x)
+    apt = cos * x + 2
+    return apt
+
+
+def torneio(cromossomos):
+    novovetor_cromossomos = [Cromossomo() for _ in range(10)]
+    for i in range(10):
+        r1 = randint(0, 9)
+        r2 = randint(0, 9)
+        print(r1, r2)
+        print(cromossomos[r1].aptidao, cromossomos[r2].aptidao)
+        if cromossomos[r1].aptidao > cromossomos[r2].aptidao:
+            novovetor_cromossomos[i] = (cromossomos[r2])
+        else:
+            novovetor_cromossomos[i] = (cromossomos[r1])
+    # print(novovetor_cromossomos[i].bits)
+    return novovetor_cromossomos
+
 
 class Cromossomo():
 
     def __init__(self):
-        self.bits=[0,0,0,0,0,0,0,0,0,0]
-        self.normalizado=0
-        self.aptidao=0
+        self.bits = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        self.normalizado = 0
+        self.aptidao = 0
 
     def gera_vetor_bits(self):
-        newcromo=[]
+        newcromo = []
         for i in range(len(self.bits)):
-            newcromo.append(randint(0,1))
+            newcromo.append(randint(0, 1))
         return newcromo
 
     def mutcromo(self):
         bits = self.bits
         for i in range(len(bits)):
-            chance = randint(0,100)
-            # print(chance)
+            chance = randint(0, 100)
             if chance <= 1:
                 print('gotcha')
                 if bits[i] == 0:
-                    bits[i] =1
-
+                    bits[i] = 1
                 elif bits[i] == 1:
-                    bits[i] =0
+                    bits[i] = 0
 
         self.bits = bits
 
+###########################################
+# INICIO CODIGO
+###########################################
 
-
-
-vetor_cromossomos= [Cromossomo() for _ in range(10)] # criando 10 cromossomos
-cromo = Cromossomo()
-for i in vetor_cromossomos:          #parte 1
-    i.bits=i.gera_vetor_bits()
-    i.mutcromo()
-    # i.normalizado=normaliza(i.bits)
-    print(i.normalizado)
+vetor_cromossomos = [Cromossomo() for _ in range(10)]  # criando 10 cromossomos
+for i in vetor_cromossomos:
+    i.bits = i.gera_vetor_bits()  # parte 1
+    i.normalizado = normaliza(i.bits)
+    i.aptidao = calc_aptidao(i.normalizado)  # parte 2
+    print(i.aptidao)
+    print(i.bits)
+geracao = 1
+while geracao <= 10:
+    vetor_cromossomos = torneio(vetor_cromossomos)
+    print(len(vetor_cromossomos))
+    for i in vetor_cromossomos:
+        print(i.bits)
+    geracao += 1
 
     '''
 print("teste binario decimal")
-    
+
 print(conversor_b_d(vetor_cromossomos[0].bits))	
 print(normaliza([1,0,0,0,1,0,1,1,1,0,1,1,0,1,0,1,0,0,0,1,1,1]))	#teste vetor do slide
    '''
