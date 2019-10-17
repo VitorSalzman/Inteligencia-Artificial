@@ -34,8 +34,8 @@ def conversor_b_d(vet):
 def normaliza(vet):
 	b10 = conversor_b_d(vet)
 	l=len(vet)
-	minimo = -1.0
-	maximo = 2.0
+	minimo = -20.0
+	maximo = 20.0
 	x = minimo +( maximo - minimo) *(b10/((2**l)-1))		
 	return x
 	
@@ -57,14 +57,16 @@ class Cromossomo():
 		
 vetor_cromossomos= [Cromossomo() for _ in range(10)] # criando 10 cromossomos
 cromo = Cromossomo()
-for i in vetor_cromossomos:
+for i in vetor_cromossomos:          #parte 1
 	i.bits=i.gera_vetor_bits()
-	#i.normalizado=i.normaliza()
-	print(i.bits)
+	i.normalizado=normaliza(i.bits)
+	print(i.normalizado)
+	
+	'''
 print("teste binario decimal")
 	
 print(conversor_b_d(vetor_cromossomos[0].bits))	
 print(normaliza([1,0,0,0,1,0,1,1,1,0,1,1,0,1,0,1,0,0,0,1,1,1]))	#teste vetor do slide
-   
+   '''
 
 
