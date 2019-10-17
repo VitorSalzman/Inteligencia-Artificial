@@ -1,0 +1,24 @@
+1 - gerar população inicial OK
+	gerar 10 individuos, que sao 10 sequencias de 10 bits aleatorios 
+
+2 - calcular normalização e aptidão OK
+	Cálculo de normalização
+	Resposta: joga na fórmula de aptidão(tipo fitnes)
+
+3 - Seleção por torneio
+	Seleciona 2 cromossomos aleatoriamente
+	o de menor aptidão é selecionado
+
+4 - Crossover
+	Seleciona dois pais
+	Aplica taxa de crossover randomicamente(deve ser até 60%)
+	Calcula taxa de corte randomicamente(de 1 a 9)                       
+
+5 - Mutação
+	Calcula taxa de mutação randomicamente(0 a 1)
+	Cálculo é feito para cada bit de cada filho
+
+6 - Cálculo de aptidão
+	Cálculo de normalização
+	Resposta: joga na fórmula de aptidão(tipo fitnes)
+	
