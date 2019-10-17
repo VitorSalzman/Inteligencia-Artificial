@@ -23,48 +23,68 @@
 #  
 from random import randint
 
-	
+def mutation(vetCromo):
+    for cromo in vetCromo:
+        cromo.mutcromo()
+
+
 def conversor_b_d(vet):
-	soma=0
-	for i in range(len(vet)):
-		if vet[len(vet)-i-1]==1: 
-			soma += 2**i
-	return soma
-	
+    soma=0
+    for i in range(len(vet)):
+        if vet[len(vet)-i-1]==1:
+            soma += 2**i
+    return soma
+
 def normaliza(vet):
-	b10 = conversor_b_d(vet)
-	l=len(vet)
-	minimo = -20.0
-	maximo = 20.0
-	x = minimo +( maximo - minimo) *(b10/((2**l)-1))		
-	return x
-	
+    b10 = conversor_b_d(vet)
+    l=len(vet)
+    minimo = -20.0
+    maximo = 20.0
+    x = minimo +( maximo - minimo) *(b10/((2**l)-1))
+    return x
+
 class Cromossomo():
-	
-	def __init__(self):
-		self.bits=[0,0,0,0,0,0,0,0,0,0]
-		self.normalizado=0
-		self.aptidao=0
-	
-	def gera_vetor_bits(self):
-		newcromo=[]
-		for i in range(len(self.bits)):
-			newcromo.append(randint(0,1))
-		return newcromo
-	
-		
-		
-		
+
+    def __init__(self):
+        self.bits=[0,0,0,0,0,0,0,0,0,0]
+        self.normalizado=0
+        self.aptidao=0
+
+    def gera_vetor_bits(self):
+        newcromo=[]
+        for i in range(len(self.bits)):
+            newcromo.append(randint(0,1))
+        return newcromo
+
+    def mutcromo(self):
+        bits = self.bits
+        for i in range(len(bits)):
+            chance = randint(0,100)
+            # print(chance)
+            if chance <= 1:
+                print('gotcha')
+                if bits[i] == 0:
+                    bits[i] =1
+
+                elif bits[i] == 1:
+                    bits[i] =0
+
+        self.bits = bits
+
+
+
+
 vetor_cromossomos= [Cromossomo() for _ in range(10)] # criando 10 cromossomos
 cromo = Cromossomo()
 for i in vetor_cromossomos:          #parte 1
-	i.bits=i.gera_vetor_bits()
-	i.normalizado=normaliza(i.bits)
-	print(i.normalizado)
-	
-	'''
+    i.bits=i.gera_vetor_bits()
+    i.mutcromo()
+    # i.normalizado=normaliza(i.bits)
+    print(i.normalizado)
+
+    '''
 print("teste binario decimal")
-	
+    
 print(conversor_b_d(vetor_cromossomos[0].bits))	
 print(normaliza([1,0,0,0,1,0,1,1,1,0,1,1,0,1,0,1,0,0,0,1,1,1]))	#teste vetor do slide
    '''
