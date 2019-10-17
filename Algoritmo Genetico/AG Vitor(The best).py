@@ -22,7 +22,7 @@
 #  
 #  
 from random import randint
-
+import math
 	
 def conversor_b_d(vet):
 	soma=0
@@ -38,7 +38,26 @@ def normaliza(vet):
 	maximo = 20.0
 	x = minimo +( maximo - minimo) *(b10/((2**l)-1))		
 	return x
+
+def calc_aptidao(x):
+	cos=math.cos(x)
+	apt=cos*x+2
+	return apt
+
+def torneio(cromossomos):
 	
+	novovetor_cromossomos=[Cromossomo() for _ in range(10)]
+	for i in range(10):
+		r1=randint(0,9)
+		r2=randint(0,9)
+		print(r1,r2)
+		print(cromossomos[r1].aptidao,	cromossomos[r2].aptidao)
+		if cromossomos[r1].aptidao > cromossomos[r2].aptidao:
+			novovetor_cromossomos[i]=(cromossomos[r2])
+		else:		
+			novovetor_cromossomos[i]=(cromossomos[r1])
+		#print(novovetor_cromossomos[i].bits)		
+	return novovetor_cromossomos		
 class Cromossomo():
 	
 	def __init__(self):
@@ -52,15 +71,27 @@ class Cromossomo():
 			newcromo.append(randint(0,1))
 		return newcromo
 	
-		
-		
+###########################################	
+#INICIO CODIGO	
+###########################################
 		
 vetor_cromossomos= [Cromossomo() for _ in range(10)] # criando 10 cromossomos
-cromo = Cromossomo()
-for i in vetor_cromossomos:          #parte 1
-	i.bits=i.gera_vetor_bits()
+for i in vetor_cromossomos:          
+	i.bits=i.gera_vetor_bits()#parte 1
 	i.normalizado=normaliza(i.bits)
-	print(i.normalizado)
+	i.aptidao=calc_aptidao(i.normalizado)#parte 2
+	print(i.aptidao)
+	print(i.bits)
+geracao=1
+while geracao<=10:
+	vetor_cromossomos=torneio(vetor_cromossomos)
+	print(len(vetor_cromossomos))
+	for i in vetor_cromossomos: 
+		print(i.bits)
+	geracao+=1	
+	
+	
+
 	
 	'''
 print("teste binario decimal")
