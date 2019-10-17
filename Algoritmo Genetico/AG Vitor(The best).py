@@ -31,6 +31,14 @@ def conversor_b_d(vet):
 			soma += 2**i
 	return soma
 	
+def normaliza(vet):
+	b10 = conversor_b_d(vet)
+	l=len(vet)
+	minimo = -1.0
+	maximo = 2.0
+	x = minimo +( maximo - minimo) *(b10/((2**l)-1))		
+	return x
+	
 class Cromossomo():
 	
 	def __init__(self):
@@ -43,10 +51,7 @@ class Cromossomo():
 		for i in range(len(self.bits)):
 			newcromo.append(randint(0,1))
 		return newcromo
-	'''def normaliza(self):
-		vet=self.bits
-		decimal=conversor_b_d(vet)
-		return decimal'''
+	
 		
 		
 		
@@ -59,7 +64,7 @@ for i in vetor_cromossomos:
 print("teste binario decimal")
 	
 print(conversor_b_d(vetor_cromossomos[0].bits))	
-print(conversor_b_d([1,0,0,0,1,0,1,1,1,0,1,1,0,1,0,1,0,0,0,1,1,1]))	#teste vetor do slide
+print(normaliza([1,0,0,0,1,0,1,1,1,0,1,1,0,1,0,1,0,0,0,1,1,1]))	#teste vetor do slide
    
 
 
