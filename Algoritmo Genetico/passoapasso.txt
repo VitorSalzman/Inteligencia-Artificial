@@ -5,20 +5,20 @@
 	Cálculo de normalização
 	Resposta: joga na fórmula de aptidão(tipo fitnes)
 
-3 - Seleção por torneio
+3 - Seleção por torneio OK
 	Seleciona 2 cromossomos aleatoriamente
 	o de menor aptidão é selecionado
 
-4 - Crossover
+4 - Crossover OK
 	Seleciona dois pais
 	Aplica taxa de crossover randomicamente(deve ser até 60%)
 	Calcula taxa de corte randomicamente(de 1 a 9)                       
 
-5 - Mutação
+5 - Mutação OK
 	Calcula taxa de mutação randomicamente(0 a 1)
 	Cálculo é feito para cada bit de cada filho
 
-6 - Cálculo de aptidão
+6 - Cálculo de aptidão OK
 	Cálculo de normalização
 	Resposta: joga na fórmula de aptidão(tipo fitnes)
 	
