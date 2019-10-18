@@ -125,7 +125,7 @@ def crossOver(cromossomos):
         r2 = randint(0, 9)
         # poderiamos verificar se é o mesmo numero
         chance = randint(0,100)
-        if chance <= 100:
+        if chance <= 60:
             crop =  randint(1, 8) #aonde q entra a linha de corte
             cromo1 = cromossomos[r1].bits
             cromo2 = cromossomos[r2].bits
