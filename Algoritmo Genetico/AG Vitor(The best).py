@@ -80,9 +80,7 @@ class Cromossomo():
         return self.aptidao
 
     def print(self):
-        print("bits:", self.bits)
-        print("norm:", self.normalizado)
-        print("apti:", self.aptidao)
+        print("bits: {} | apti: {}".format(self.bits,self.aptidao))
 
 def mutation(vetCromo):
     for cromo in vetCromo:
@@ -93,7 +91,7 @@ def calc_aptidao(vetCromo):
     for cromo in vetCromo:
         a = cromo.normaliza()
         b = cromo.calc_aptidao()
-        print("norm: {} | apt: {}".format(a,b))
+        print("apt: {} | norm {}".format(b,a))
     return vetCromo
 
 def conversor_b_d(vet):
@@ -153,6 +151,28 @@ def crossOver(cromossomos):
 
     return novovetor_cromossomos
 
+def elitismo(vetCromo):
+    minimo = math.inf
+    for cromo in vetCromo:
+        if cromo.getAptidao() <= minimo:
+            elite = cromo
+            minimo = cromo.getAptidao()
+    print("ELITE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    elite.print()
+    return elite
+
+def add_elite(vetCromo,elite):
+    maximo = -math.inf
+    for i in range(len(vetCromo)):
+        if vetCromo[i].getAptidao() >= maximo:
+            DS = i # pos dark sheep
+            maximo = vetCromo[i].getAptidao()
+
+    vetCromo[DS] = elite
+    print("pos DS:",DS)
+    return vetCromo
+
+
 def printCromo(vetCromo):
     for cromo in vetCromo:
         cromo.print()
@@ -171,6 +191,8 @@ for i in vetor_cromossomos:
 geracao = 1
 while geracao <= 10:
     print("START GENERATION")
+    # reservando o elite antes de mudar td
+    elite = elitismo(vetor_cromossomos)
     print("Torneio")
     vetor_cromossomos = torneio(vetor_cromossomos)
     print("CrossOver")
@@ -179,8 +201,10 @@ while geracao <= 10:
     vetor_cromossomos = mutation(vetor_cromossomos)
     print("Aptidation Times")
     vetor_cromossomos = calc_aptidao(vetor_cromossomos)
-    # print("print time")
-    # printCromo(vetor_cromossomos)
+    print("Elitismo")
+    vetor_cromossomos = add_elite(vetor_cromossomos,elite)
+    print("print time")
+    printCromo(vetor_cromossomos)
     print("END GENERATION")
 
     geracao += 1
