@@ -1,28 +1,7 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  teste.py
-#  
-#  Copyright 2019 20161BSI0403 <20161BSI0403@SR6733>
-#  
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#  
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#  
-#  You should have received a copy of the GNU General Public License
-#  along with this program; if not, write to the Free Software
-#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-#  MA 02110-1301, USA.
-#  
-#  
 from random import randint
 import math
+import xlwt
+from xlwt import Workbook
 
 class Cromossomo():
 
@@ -177,6 +156,8 @@ def printCromo(vetCromo):
     for cromo in vetCromo:
         cromo.print()
 
+
+
 ###########################################
 # INICIO CODIGO
 ###########################################
@@ -185,41 +166,54 @@ global globalmutation
 global globalcross
 
 globalmutation = 1
-globalcross = 80 
-
-vetor_cromossomos = [Cromossomo() for _ in range(10)]  # criando 10 cromossomos
-for i in vetor_cromossomos:
-    i.bits = i.gera_vetor_bits()  # parte 1
-    i.normaliza()
-    i.calc_aptidao()
-
-    print(i.bits,i.aptidao)
-geracao = 1
-while geracao <= 10:
-    print("START GENERATION")
-    # reservando o elite antes de mudar td
-    elite = elitismo(vetor_cromossomos)
-    print("Torneio")
-    vetor_cromossomos = torneio(vetor_cromossomos)
-    print("CrossOver")
-    vetor_cromossomos = crossOver(vetor_cromossomos)
-    print("Mutation")
-    vetor_cromossomos = mutation(vetor_cromossomos)
-    print("Aptidation Times")
-    vetor_cromossomos = calc_aptidao(vetor_cromossomos)
-    print("Elitismo")
-    vetor_cromossomos = add_elite(vetor_cromossomos,elite)
-    print("print time")
-    printCromo(vetor_cromossomos)
-    print("END GENERATION")
-
-    geracao += 1
-
-    '''
-print("teste binario decimal")
-
-print(conversor_b_d(vetor_cromossomos[0].bits))	
-print(normaliza([1,0,0,0,1,0,1,1,1,0,1,1,0,1,0,1,0,0,0,1,1,1]))	#teste vetor do slide
-   '''
+globalcross = 80
+maxGeneration = [10,20]
+interations = 10
 
 
+wb = Workbook()
+sheet = wb.add_sheet('algoritmo_genetico_table')
+x = 1
+y = 1
+
+for generation in maxGeneration:
+
+    for i in range(generation):
+        sheet.write(i+y+1, x, 'gen-{}'.format(i + 1))
+
+    for i in range(interations):
+        sheet.write(y, i+x+1, 'int-{}'.format(i + 1))
+
+    for j in range(interations):
+
+        vetor_cromossomos = [Cromossomo() for _ in range(10)]  # criando 10 cromossomos
+        for i in vetor_cromossomos:
+            i.bits = i.gera_vetor_bits()  # parte 1
+            i.normaliza()
+            i.calc_aptidao()
+
+            print(i.bits, i.aptidao)
+
+        for i in range(generation):
+            print("START GENERATION")
+            # reservando o elite antes de mudar td
+            elite = elitismo(vetor_cromossomos)
+            print("Torneio")
+            vetor_cromossomos = torneio(vetor_cromossomos)
+            print("CrossOver")
+            vetor_cromossomos = crossOver(vetor_cromossomos)
+            print("Mutation")
+            vetor_cromossomos = mutation(vetor_cromossomos)
+            print("Aptidation Times")
+            vetor_cromossomos = calc_aptidao(vetor_cromossomos)
+            print("Elitismo")
+            vetor_cromossomos = add_elite(vetor_cromossomos,elite)
+            print("print time")
+            printCromo(vetor_cromossomos)
+            print("END GENERATION ", i)
+
+            eliteSon = elitismo(vetor_cromossomos)
+            sheet.write(i+y + 1, x+j+1, eliteSon.getAptidao())
+    x = 1
+    y = 15
+wb.save('algoritmo_genetico_table.xls')
