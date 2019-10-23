@@ -41,7 +41,7 @@ class Cromossomo():
         bits = self.bits
         for i in range(len(bits)):
             chance = randint(0, 100)
-            if chance <= 1:
+            if chance <= globalmutation:
                 print("MUTOU! pos:", i)
                 print("antes:{}", bits)
                 if bits[i] == 0:
@@ -123,7 +123,7 @@ def crossOver(cromossomos):
         r2 = randint(0, 9)
         # poderiamos verificar se é o mesmo numero
         chance = randint(0,100)
-        if chance <= 60:
+        if chance <= globalcross:
             crop =  randint(1, 8) #aonde q entra a linha de corte
             cromo1 = cromossomos[r1].bits
             cromo2 = cromossomos[r2].bits
@@ -180,6 +180,12 @@ def printCromo(vetCromo):
 ###########################################
 # INICIO CODIGO
 ###########################################
+
+global globalmutation
+global globalcross
+
+globalmutation = 1
+globalcross = 80 
 
 vetor_cromossomos = [Cromossomo() for _ in range(10)]  # criando 10 cromossomos
 for i in vetor_cromossomos:
