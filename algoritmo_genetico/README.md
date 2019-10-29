@@ -25,25 +25,34 @@ Desse modo f(n) é, portanto, o custo estimado da solução de custo mais baixo 
 
 ### Problema  <br>
 
-O problema proposto é o caminho descrito na figura a seguir, onde um objeto precisa caminhar verticalmente/horizontalmente do ponto inicial, até o ponto final, sem que este colida com os obstáculos(em preto). O algoritmo deve ser capaz de definir o melhor caminho, de acordo com a heurística recebida.<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/ProblemaProposto.PNG"> <br><br>
+O problema proposto é a minimalização da função abaixo.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/Funcao_Aptidao.PNG"> <br>
+A função citada gera um gráfico, que contém alguns mínimos locais, que estarão visíveis na solução. Mas o resultado esperado de um bom algoritmo que resolva tal problema é próximo de <b>-16.7</b>. <br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/grafico_aptidao.PNG"> <br><br>
 
 ### Implementação<br>
-O trecho a seguir, recebe parâmetros de linha e coluna e, de acordo com o estado representado, calcula os estados sucessores com peso 1 à frente.<br><br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/EncontraEstadosSucessores.PNG"> <br><br>
 
-A função "verificaObstaculo" retorna <b>True</b>, caso as dimensões passadas por parâmetro sejam válidas(valor de linha e coluna devem pertencer ao tamanho da Matriz, além de não coincidirem com algum obstáculo). Caso contrário, retorna <b>False</b><br>
 
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/EncontraEstadosSucessores.PNG"> <br><br>
+A aptidão, informada na fórmula citada anteriormente, é calculada no trecho de código abaixo.<br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/1_aptidao.PNG"> <br><br>
 
-Este trecho calcula o peso da distância de um estado, até o estado final, ou seja, o objetivo.<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/CalculaDistanciaMeta.png"><br><br>
+Para representar os cromossomos, a seguinte estrutura de dados foi codificada, guardando um vetor de bits, o valor normalizado e a aptidão.<br>
+<https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/1_cromossomo.PNG"> <br><br>
 
-De acordo com a "margem"(estados que contornam o estado atual) e a heurística(h=f+g), calcula-se o estado mais promissor.<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/EncontraEstadoPromissor.png"><br><br>
+Para transformar o vetor de bits em um valor normalizado, é necessário o processamento a seguir.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/1_normaliza.PNG"><br><br>
 
-Esse loop controla todas as iterações do código. A cada tentativa de caminho, uma iteração é adicionada.<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/Tentativas.png"><br><br>
+O modo de seleção escolhido para o trabalho foi o Torneio, representado a seguir.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/1_torneio.PNG"><br><br>
+
+Para o crossover, foi definido a porcentagem de <b>80%</b>, o que melhorou consideravelmente o desempenho do código.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/1_crossOver.PNG"><br><br>
+
+A porcentagem de mutação escolhida foi de <b>10%</b>. Outras porcentagens foram testadas, mas não influenciaram positivamente no desempenho do código.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/1_mutacao.PNG"><br><br>
+
+Ao realizar as mutações, o melhor cromossomo pai é escolhido para permanecer nas interações. Este substitui o pior cromossomo filho.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/1_elite.PNG"><br><br>
 
 O código completo encontra-se em https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/busca_a/busca_a.py. <br>
 
