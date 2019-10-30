@@ -37,7 +37,7 @@ A aptidão, informada na fórmula citada anteriormente, é calculada no trecho d
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/1_aptidao.PNG"> <br><br>
 
 Para representar os cromossomos, a seguinte estrutura de dados foi codificada, guardando um vetor de bits, o valor normalizado e a aptidão.<br>
-<https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/1_cromossomo.PNG"> <br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/1_cromossomo.PNG"> <br><br>
 
 Para transformar o vetor de bits em um valor normalizado, é necessário o processamento a seguir.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/1_normaliza.PNG"><br><br>
@@ -54,7 +54,7 @@ A porcentagem de mutação escolhida foi de <b>10%</b>. Outras porcentagens fora
 Ao realizar as mutações, o melhor cromossomo pai é escolhido para permanecer nas interações. Este substitui o pior cromossomo filho.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/1_elite.PNG"><br><br>
 
-O código completo encontra-se em https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/busca_a/busca_a.py. <br>
+O código completo encontra-se em https://github.com/VitorSalzman/Inteligencia-Artificial/tree/master/algoritmo_genetico/ag. <br>
 
    
 
@@ -64,13 +64,13 @@ A cada execução, o código gera uma tabela em csv, que contém os dados de 10 
 A seguir está a tabela dos dados referentes a 10 interações com 10 gerações. A média geral foi de <b>-16,7050761119737</b>.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/print_tab_10_10.png"><br>
 
-Para essa execução, também há um gráfico que mostra a média das execuções, e também a melhor geração.<br>
+Para essa execução, também há um gráfico que mostra a média das execuções, e também a melhor interação. Nota-se que a melhor interação iniciou em um valor acima de -12, até ultrapassar e normalizar na média.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/Grafico_10_10.PNG"><br><br>
 
 Na mesma execução, há a tabela que contém os dados referentes a 10 interações com 20 gerações. A média geral foi de <b>-16,850059495935</b>.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/print_tab_10_20.png"><br>
 
-Para essa execução, também há um gráfico que mostra a média das execuções, e também a melhor geração.<br>
+Para essa execução, também há um gráfico que mostra a média das execuções, e também a melhor interação. Nota-se que a melhor interação iniciou em um valor acima de -8, até ultrapassar e normalizar na média.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/Grafico_10_20.PNG"><br><br>
 
 <b>Por fim, concluímos que a taxa de crossover de 80% melhorou o desempenho do código em até 30%.</b>
