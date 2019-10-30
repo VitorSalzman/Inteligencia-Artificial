@@ -18,7 +18,7 @@ Criado em 1960 por John Holland, o algoritmo tinha o objetivo inicial de estudar
 <li>Em seguida, através do operador de "seleção", escolhem-se os indivíduos demelhor valor (dado pela função de aptidão) como base para a criação de um novo conjunto de possíveis soluções, chamado de nova "geração";</li><br>
 <li>Esta nova geração é obtida aplicando-se sobre os indivíduos selecionadosoperações que misturem suas características (chamadas "genes"), através dos operadores de "cruzamento" ("crossover") e "mutação";</li><br>
 <li>Esta nova geração é obtida aplicando-se sobre os indivíduos selecionadosoperações que misturem suas características (chamadas "genes"), através dos operadores de "cruzamento" ("crossover") e "mutação";</li><br>
-#######################PAREI AQUI
+
 
 
 
