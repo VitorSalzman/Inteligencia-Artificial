@@ -73,7 +73,7 @@ Na mesma execução, há a tabela que contém os dados referentes a 10 interaç�
 Para essa execução, também há um gráfico que mostra a média das execuções, e também a melhor interação. Nota-se que a melhor interação iniciou em um valor acima de -8, até ultrapassar e normalizar na média.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/Grafico_10_20.PNG"><br><br>
 
-<b>Por fim, concluímos que a taxa de crossover de 80% melhorou o desempenho do código em até 30%.</b>
+<b>Por fim, concluímos que a taxa de crossover de 80% melhorou o desempenho do código em até 25%.</b>
 
 ### Referências bibliográficas<br>
 <li>http://conteudo.icmc.usp.br/pessoas/andre/research/genetic/</li><br>
