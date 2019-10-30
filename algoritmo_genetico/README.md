@@ -1,4 +1,4 @@
-# Inteligencia Artificial
+# Inteligência Artificial
 
 #### <font color="green"> Membros </font><br>
 Vitor Soares Salzman - 20161bsi0403 - vitor-salzman96@hotmail.com<br>
@@ -16,8 +16,8 @@ Criado em 1960 por John Holland, o algoritmo tinha o objetivo inicial de estudar
 <li>Inicialmente escolhe-se uma população inicial, normalmente formada por indivíduos criados aleatoriamente;</li><br>
 <li>Avalia-se toda a população de indivíduos segundo algum critério, determinado por uma função que avalia a qualidade do indivíduo (função de aptidão ou"fitness");</li><br>
 <li>Em seguida, através do operador de "seleção", escolhem-se os indivíduos demelhor valor (dado pela função de aptidão) como base para a criação de um novo conjunto de possíveis soluções, chamado de nova "geração";</li><br>
-<li>Esta nova geração é obtida aplicando-se sobre os indivíduos selecionadosoperações que misturem suas características (chamadas "genes"), através dos operadores de "cruzamento" ("crossover") e "mutação";</li><br>
-<li>Esta nova geração é obtida aplicando-se sobre os indivíduos selecionadosoperações que misturem suas características (chamadas "genes"), através dos operadores de "cruzamento" ("crossover") e "mutação";</li><br>
+<li>Esta nova geração é obtida aplicando-se sobre os indivíduos selecionados, operações que misturem suas características (chamadas "genes"), através dos operadores de "cruzamento" ("crossover") e "mutação".</li><br>
+
 
 
 
@@ -25,7 +25,7 @@ Criado em 1960 por John Holland, o algoritmo tinha o objetivo inicial de estudar
 
 ### Problema  <br>
 
-O problema proposto é a minimalização da função abaixo.<br>
+O problema proposto é a minimização da função abaixo.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/Funcao_Aptidao.PNG"> <br>
 A função citada gera um gráfico, que contém alguns mínimos locais, que estarão visíveis na solução. Mas o resultado esperado de um bom algoritmo que resolva tal problema é próximo de <b>-16.7</b>. <br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/grafico_aptidao.PNG"> <br><br>
