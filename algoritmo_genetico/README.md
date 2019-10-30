@@ -48,7 +48,7 @@ O modo de seleção escolhido para o trabalho foi o Torneio, representado a segu
 Para o crossover, foi definido a porcentagem de <b>80%</b>, o que melhorou consideravelmente o desempenho do código.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/1_crossOver.PNG"><br><br>
 
-A porcentagem de mutação escolhida foi de <b>10%</b>. Outras porcentagens foram testadas, mas não influenciaram positivamente no desempenho do código.<br>
+A porcentagem de mutação escolhida foi de <b>1%</b>. Outras porcentagens foram testadas, mas não influenciaram positivamente no desempenho do código.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/1_mutacao.PNG"><br><br>
 
 Ao realizar as mutações, o melhor cromossomo pai é escolhido para permanecer nas interações. Este substitui o pior cromossomo filho.<br>
