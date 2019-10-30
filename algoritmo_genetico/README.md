@@ -19,9 +19,9 @@ Criado em 1960 por John Holland, o algoritmo tinha o objetivo inicial de estudar
 <li>Esta nova geração é obtida aplicando-se sobre os indivíduos selecionadosoperações que misturem suas características (chamadas "genes"), através dos operadores de "cruzamento" ("crossover") e "mutação";</li><br>
 <li>Esta nova geração é obtida aplicando-se sobre os indivíduos selecionadosoperações que misturem suas características (chamadas "genes"), através dos operadores de "cruzamento" ("crossover") e "mutação";</li><br>
 #######################PAREI AQUI
-<b> f(n) = g(n) + h(n) (1) </b><br>
 
-Desse modo f(n) é, portanto, o custo estimado da solução de custo mais baixo passando por n. Esta técnica requer que a estimação do custo restante no próximo nó não seja nunca maior que o custo restante do nó anterior. Diferente do Dijkstra,  sob esta hipótese, sempre é possível encontrar a solução ótima com a busca A*.<br>
+
+
 
 ### Problema  <br>
 
@@ -59,19 +59,23 @@ O código completo encontra-se em https://github.com/VitorSalzman/Inteligencia-A
    
 
 ### Resultados<br>
-O mapa do problema, apresenta uma matriz 10x10, representado por <b>zeros e um's</b>, sendo 0 como <b>estado livre</b>, e 1 como <b>Obstáculo</b>. A seguir, um teste realizado com a posição inicial de 0,0, e a posição final 8,8, tendo início em <b>S</b>, e fim em <b>E</b>.<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/caminhoPadraoTracejado.png"><br><br>
+A cada execução, o código gera uma tabela em csv, que contém os dados de 10 interações, com 10 gerações, e outra tabela(no mesmo arquivo csv) que contém os dados de 10 interações, com 20 gerações. <br>
 
-Parametrizando o código, foi testado com a posição inicial em 0,9, e a final em 9,0:<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/caminhoParametrizadoTracejado.png"><br><br>
+A seguir está a tabela dos dados referentes a 10 interações com 10 gerações. A média geral foi de <b>-16,7050761119737</b>.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/print_tab_10_10.png"><br>
 
-Testamos com dimensões que extrapolam o domínio do problema:<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/DimensoesIncorretas.png"><br><br>
+Para essa execução, também há um gráfico que mostra a média das execuções, e também a melhor geração.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/Grafico_10_10.PNG"><br><br>
 
-Testamos, também, com dimensões que colidem com obstáculos no mapa:<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/imagens/Colisao.png"><br><br>
+Na mesma execução, há a tabela que contém os dados referentes a 10 interações com 20 gerações. A média geral foi de <b>-16,850059495935</b>.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/print_tab_10_20.png"><br>
+
+Para essa execução, também há um gráfico que mostra a média das execuções, e também a melhor geração.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/Grafico_10_20.PNG"><br><br>
+
+<b>Por fim, concluímos que a taxa de crossover de 80% melhorou o desempenho do código em até 30%.</b>
 
 ### Referências bibliográficas<br>
-<li>http://pointclouds.org/documentation/tutorials/kdtree_search.php#kdtree-search</li><br>
-<li>http://repositorio.roca.utfpr.edu.br/jspui/bitstream/1/10221/1/PG_COELE_2018_1_03.pdf</li><br>
+<li>http://conteudo.icmc.usp.br/pessoas/andre/research/genetic/</li><br>
+<li>http://www.scielo.br/scielo.php?script=sci_arttext&pid=S0103-17592008000300006</li><br>
 <li>https://github.com/felipemartinsss/RepositorioIAsc/tree/master/Python/buscas</li><br>
