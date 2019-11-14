@@ -1,60 +1,52 @@
 from random import randint
 import math
+import random
 import xlwt
 from xlwt import Workbook
 
 class Cromossomo():
 
     def __init__(self):
-        self.genes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.normalizado = 0
-        self.aptidao = 0
+        self.gene = None
+        self.aptidao = None
 
-    def gera_vetor_bits(self):
-        newcromo = []
-        for i in range(len(self.genes)):
-            newcromo.append(randint(0, 1))
-        return newcromo
+    def gera_gene(self):
+        self.gene = random.uniform(-20,20)
 
-    def mutation(self):
-        genes = self.genes
-        for i in range(len(genes)):
-            chance = randint(0, 100)
-            if chance <= globalmutation:
-                print("MUTOU! pos:", i)
-                print("antes:{}", genes)
-                if genes[i] == 0:
-                    genes[i] = 1
-                elif genes[i] == 1:
-                    genes[i] = 0
-                print("depois:{}",genes)
+    def mutation(self,g,gmax):
+        genes = self.gene
+        chance = randint(0, 100)
+        if chance <= globalmutation:
+            print("MUTOU!")
+            print("antes:{}", genes)
+            r1 = random.random()
+            r2 = random.random()
+            b = 20
+            a = -20
+            f = pow((r2*(1-(g/gmax))),20)
 
-        self.genes = genes
+            if (r1 >= 0.5):
+                c = genes +(b-genes) * f
+            else:
+                c = genes -(genes-a) * f
 
-    def crossOver(self,pos,vetBin):
-        self.genes[pos:] = vetBin[pos:]
+            genes = c
+
+            print("depois:{}",genes)
+
+        self.gene = genes
 
     def calc_aptidao(self):
-        x = self.normalizado
+        x = self.gene
         cos = math.cos(x)
         apt = cos * x + 2
         self.aptidao = apt
         return self.aptidao
 
-    def normaliza(self):
-        vet = self.genes
-        b10 = conversor_b_d(vet)
-        l = len(vet)
-        minimo = -20.0
-        maximo = 20.0
-        x = minimo + (maximo - minimo) * (b10 / ((2 ** l) - 1))
-        self.normalizado = x
-        return self.normalizado
 
-    def getBits(self):
-        return self.genes
-    def getNormalizado(self):
-        return self.normalizado
+    
+    def getGene(self):
+        return self.gene
     def getAptidao(self):
         return self.aptidao
 
@@ -68,17 +60,9 @@ def mutation(vetCromo):
 
 def calc_aptidao(vetCromo):
     for cromo in vetCromo:
-        a = cromo.normaliza()
         b = cromo.calc_aptidao()
         print("apt: {} | norm {}".format(b,a))
     return vetCromo
-
-def conversor_b_d(vet):
-    soma = 0
-    for i in range(len(vet)):
-        if vet[len(vet) - i - 1] == 1:
-            soma += 2 ** i
-    return soma
 
 def torneio(cromossomos):
     novovetor_cromossomos = [Cromossomo() for _ in range(10)]
@@ -103,29 +87,23 @@ def crossOver(cromossomos):
         # poderiamos verificar se é o mesmo numero
         chance = randint(0,100)
         if chance <= globalcross:
-            crop =  randint(1, 8) #aonde q entra a linha de corte
-            cromo1 = cromossomos[r1].genes
-            cromo2 = cromossomos[r2].genes
+
+            B = random.uniform(-A, 1 + A)
+
+            cromo1 = cromossomos[r1].getGene()
+            cromo2 = cromossomos[r2].getGene()
 
             print("Antes")
-            print("p1:{}|p2:{}".format(cromo1[:crop],cromo1[crop:]))
-            print("p1:{}|p2:{}".format(cromo2[:crop],cromo2[crop:]))
+            print("p1:{}|p2:{}".format(cromo1, cromo2))
 
-            aux = cromo1.copy()
-            aux[crop:] = cromo2[crop:].copy()
-            # print("p1:",aux[:crop],"|p2:",aux[crop:])
+            C = cromo1 + B * (cromo2 - cromo1)
+            C2= cromo2 + B * (cromo1 - cromo2)
 
-            novovetor_cromossomos[i].genes = aux
-
-            aux = cromossomos[r2].genes.copy()
-            aux[crop:] = cromo1[crop:].copy()
-            # print("p1:",aux[:crop],"|p2:",aux[crop:])
-
-            novovetor_cromossomos[i+1].genes = aux
+            novovetor_cromossomos[i].gene = C
+            novovetor_cromossomos[i+1].gene = C2
 
             print("Depois")
-            print("p1:{}|p2:{}".format(novovetor_cromossomos[i].genes[:crop], novovetor_cromossomos[i].genes[crop:]))
-            print("p1:{}|p2:{}".format(novovetor_cromossomos[i+1].genes[:crop], novovetor_cromossomos[i+1].genes[crop:]))
+            print("p1:{}|p2:{}".format(novovetor_cromossomos[i].getGene(), novovetor_cromossomos[i+1].getGene()))
             print("####################")
 
     return novovetor_cromossomos
@@ -164,7 +142,9 @@ def printCromo(vetCromo):
 
 global globalmutation
 global globalcross
+global A
 
+A = 0.5
 globalmutation = 1
 globalcross = 80
 maxGeneration = [10,20]
@@ -173,8 +153,7 @@ interations = 10
 
 vetor_cromossomos = [Cromossomo() for _ in range(10)]  # criando 10 cromossomos
 for i in vetor_cromossomos:
-    i.genes = i.gera_vetor_bits()  # parte 1
-    i.normaliza()
+    i.genes = i.gera_gene()  # parte 1
     i.calc_aptidao()
 
     # print(i.genes, i.aptidao)
