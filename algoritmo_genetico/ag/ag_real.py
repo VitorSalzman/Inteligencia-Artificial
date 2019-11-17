@@ -7,7 +7,7 @@ from xlwt import Workbook
 class Cromossomo():
 
     def __init__(self):
-        self.gene = None
+        self.gene = 0
         self.aptidao = None
 
     def gera_gene(self):
@@ -51,17 +51,17 @@ class Cromossomo():
         return self.aptidao
 
     def print(self):
-        print("genes: {} | apti: {}".format(self.genes,self.aptidao))
+        print("genes: {} | apti: {}".format(self.gene,self.aptidao))
 
-def mutation(vetCromo):
+def mutation(vetCromo,g,gmax):
     for cromo in vetCromo:
-        cromo.mutation()
+        cromo.mutation(g,gmax)
     return vetCromo
 
 def calc_aptidao(vetCromo):
     for cromo in vetCromo:
         b = cromo.calc_aptidao()
-        print("apt: {} | norm {}".format(b,a))
+       # print("apt: {} | norm {}".format(b))
     return vetCromo
 
 def torneio(cromossomos):
@@ -151,7 +151,7 @@ maxGeneration = [10,20]
 interations = 10
 
 
-vetor_cromossomos = [Cromossomo() for _ in range(10)]  # criando 10 cromossomos
+'''vetor_cromossomos = [Cromossomo() for _ in range(10)]  # criando 10 cromossomos
 for i in vetor_cromossomos:
     i.genes = i.gera_gene()  # parte 1
     i.calc_aptidao()
@@ -174,8 +174,8 @@ vetor_cromossomos = add_elite(vetor_cromossomos,elite)
 print("print time")
 printCromo(vetor_cromossomos)
 print("END GENERATION ")
-
 '''
+
 wb = Workbook()
 sheet = wb.add_sheet('algoritmo_genetico_table')
 x = 1
@@ -193,8 +193,7 @@ for generation in maxGeneration:
 
         vetor_cromossomos = [Cromossomo() for _ in range(10)]  # criando 10 cromossomos
         for i in vetor_cromossomos:
-            i.genes = i.gera_vetor_bits()  # parte 1
-            i.normaliza()
+            i.genes = i.gera_gene()  # parte 1
             i.calc_aptidao()
 
             print(i.genes, i.aptidao)
@@ -208,7 +207,7 @@ for generation in maxGeneration:
             print("CrossOver")
             vetor_cromossomos = crossOver(vetor_cromossomos)
             print("Mutation")
-            vetor_cromossomos = mutation(vetor_cromossomos)
+            vetor_cromossomos = mutation(vetor_cromossomos,i,generation)
             print("Aptidation Times")
             vetor_cromossomos = calc_aptidao(vetor_cromossomos)
             print("Elitismo")
@@ -221,5 +220,5 @@ for generation in maxGeneration:
             sheet.write(i+y + 1, x+j+1, eliteSon.getAptidao())
     x = 1
     y = 15
-'''
-# wb.save('algoritmo_genetico_table.xls')
+
+wb.save('algoritmo_genetico_table.xls')
