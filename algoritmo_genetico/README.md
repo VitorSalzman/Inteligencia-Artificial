@@ -82,8 +82,8 @@ A seguir está a tabela dos dados referentes a 10 interações com 10 gerações
 Para essa execução, também há um gráfico que mostra a média das execuções, e também a melhor interação. Nota-se que a melhor interação iniciou em um valor acima de -12, até ultrapassar e normalizar na média.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/Grafico_10_10.PNG"><br><br>
 
-Para essa execução, também há um gráfico que mostra a média das execuções, e também a melhor interação do código do algoritmo genético com valores reais na estrutura do cromossomo. A média geral foi de <b>-14,3527508470154</b><br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/tabela_agreal_10_10.PNG"><br><br>
+Para essa execução, também há um gráfico que mostra a média das execuções, e também a melhor interação do código do algoritmo genético com valores reais na estrutura do cromossomo. A média geral foi de <b>-14,3527508470154</b>.<br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/tabela_agreal_10_10.png"><br><br>
 
 
 Na mesma execução, há a tabela que contém os dados referentes a 10 interações com 20 gerações. A média geral foi de <b>-16,850059495935</b>.<br>
