@@ -55,8 +55,16 @@ Ao realizar as mutações, o melhor cromossomo pai é escolhido para permanecer 
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/1_elite.PNG"><br><br>
 
 O código completo encontra-se em https://github.com/VitorSalzman/Inteligencia-Artificial/tree/master/algoritmo_genetico/ag. <br>
+<br>
 
-   
+Em outra etapa, foram implementados alterações na estrutura do código, a fim de comparação e nova análise. as alterações foram as seguintes:<br>
+
+<li><b>Estrutura do cromossomo:</b></li>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/ag_real_cromossomo.png"><br><br>
+<li><b> Estrutura do Crossover, seguindo a fórmula: </b><br>
+   <h4>c= p1 - beta(p2 - p1),</h4><br>
+   onde beta=~U(-alfa,1+alfa), U representa uma distribuição uniforme, e alfa=0,5.
+<imb src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/ag_real_crossover.png"><br>
 
 ### Resultados<br>
 A cada execução, o código gera uma tabela em csv, que contém os dados de 10 interações, com 10 gerações, e outra tabela(no mesmo arquivo csv) que contém os dados de 10 interações, com 20 gerações. <br>
