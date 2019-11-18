@@ -61,25 +61,40 @@ Em outra etapa, foram implementados alterações na estrutura do código, a fim 
 
 <li><b>Estrutura do cromossomo:</b></li>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/ag_real_cromossomo.png"><br><br>
-<li><b> Estrutura do Crossover, seguindo a fórmula: </b><br>
+<li><b> Estrutura do Crossover</b>, seguindo a fórmula:<br>
    <h4>c= p1 - beta(p2 - p1),</h4><br>
    onde beta=~U(-alfa,1+alfa), U representa uma distribuição uniforme, e alfa=0,5.
-<imb src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/ag_real_crossover.png"><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/ag_real_crossover.png"><br>
+   <li><b> Estrutura do Crossover</br>, seguindo a fórmula descrita a seguir:</li>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/ag_real_mutation_formula.png"><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/ag_real_mutation.png"><br><br>
+
+O código completo do algoritmo genético com <b>números reais</b> encontra-se em https://github.com/VitorSalzman/Inteligencia-Artificial/tree/master/algoritmo_genetico/ag. <br>
+<br>
 
 ### Resultados<br>
 A cada execução, o código gera uma tabela em csv, que contém os dados de 10 interações, com 10 gerações, e outra tabela(no mesmo arquivo csv) que contém os dados de 10 interações, com 20 gerações. <br>
 
-A seguir está a tabela dos dados referentes a 10 interações com 10 gerações. A média geral foi de <b>-16,7050761119737</b>.<br>
+A seguir está a tabela dos dados referentes a 10 interações com 10 gerações, do código do algoritmo genético com bits na estrutura do cromossomo. A média geral foi de <b>-16,7050761119737</b>.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/print_tab_10_10.png"><br>
+
 
 Para essa execução, também há um gráfico que mostra a média das execuções, e também a melhor interação. Nota-se que a melhor interação iniciou em um valor acima de -12, até ultrapassar e normalizar na média.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/Grafico_10_10.PNG"><br><br>
+
+Para essa execução, também há um gráfico que mostra a média das execuções, e também a melhor interação do código do algoritmo genético com valores reais na estrutura do cromossomo. A média geral foi de <b>-14,3527508470154</b><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/tabela_agreal_10_10.PNG"><br><br>
+
 
 Na mesma execução, há a tabela que contém os dados referentes a 10 interações com 20 gerações. A média geral foi de <b>-16,850059495935</b>.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/print_tab_10_20.png"><br>
 
 Para essa execução, também há um gráfico que mostra a média das execuções, e também a melhor interação. Nota-se que a melhor interação iniciou em um valor acima de -8, até ultrapassar e normalizar na média.<br>
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/Grafico_10_20.PNG"><br><br>
+
+Para essa execução, também há um gráfico que mostra a média das execuções, e também a melhor interação do código do algoritmo genético com valores reais na estrutura do cromossomo. A média geral foi de <b>-16,6427465387627</b>. 
+<br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/tabela_agreal_10_20.PNG"><br><br>
 
 <b>Por fim, concluímos que a taxa de crossover de 80% melhorou o desempenho do código em até 25%.</b>
 
