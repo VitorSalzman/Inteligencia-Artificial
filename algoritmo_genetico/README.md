@@ -90,11 +90,11 @@ Na mesma execução, há a tabela que contém os dados referentes a 10 interaç�
 <img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/print_tab_10_20.png"><br>
 
 Para essa execução, também há um gráfico que mostra a média das execuções, e também a melhor interação. Nota-se que a melhor interação iniciou em um valor acima de -8, até ultrapassar e normalizar na média.<br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/Grafico_10_20.PNG"><br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/Grafico_10_20.pi"><br><br>
 
 Para essa execução, também há um gráfico que mostra a média das execuções, e também a melhor interação do código do algoritmo genético com valores reais na estrutura do cromossomo. A média geral foi de <b>-16,6427465387627</b>. 
 <br><br>
-<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/tabela_agreal_10_20.PNG"><br><br>
+<img src="https://github.com/VitorSalzman/Inteligencia-Artificial/blob/master/algoritmo_genetico/imagens/tabela_agreal_10_20.png"><br><br>
 
 <b>Por fim, concluímos que a taxa de crossover de 80% melhorou o desempenho do código em até 25%.</b>
 
