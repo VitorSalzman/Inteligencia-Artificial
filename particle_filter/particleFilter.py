@@ -18,11 +18,11 @@ class particle():
         self.Vx = random.uniform(0, vel)  # velocidade 1549 pixels/sec
         self.Vy = random.uniform(0, vel)  # velocidade 1549 pixels/sec
         self.W = 0
-        self.toNormalize = None
+        self.toNormalize = 0
 
     def prediction(self):
-        self.X = self.X + deltaT * vel
-        self.Y = self.Y + deltaT * vel
+        self.X = self.X + (deltaT * vel)
+        self.Y = self.Y + (deltaT * vel)
         self.Vx = self.Vx + random.gauss(0, pow(vel * 0.1, 2))
         self.Vy = self.Vy + random.gauss(0, pow(vel * 0.1, 2))
 
@@ -31,69 +31,81 @@ class particle():
         self.toNormalize = 1/math.exp(Dt)
 
     def normalize(self,sumToNormalize):
-        self.W = self.W/sumToNormalize
+        self.W = self.toNormalize/sumToNormalize
 
 def start(center):
-    vet_particulas = [particle(center) for _ in range(maxParticles)] #verificar se esta criando particulas corretamente
-    return vet_particulas
+    vet_particles = [particle(center) for _ in range(maxParticles)] #verificar se esta criando particulas corretamente
+    return vet_particles
 
-def prediction(vet_particulas):
-    for m in vet_particulas:
+def prediction(vet_particles):
+    for m in vet_particles:
         m.prediction()
+    return vet_particles
 
-def correction(vet_particulas,center):
-    for m in vet_particulas:
+def correction(vet_particles,center):
+    for m in vet_particles:
         m.correction(center)
+    return vet_particles
 
-def normalize(vet_particulas):
+def normalize(vet_particles):
     vetToNormalize = []
-    for m in vet_particulas:
+    for m in vet_particles:
         vetToNormalize.append(m.toNormalize)
 
     sumToNormalize = sum(vetToNormalize)
 
-    for m in vet_particulas:
+    for m in vet_particles:
         m.normalize(sumToNormalize)
 
-def resort(vet_particulas):
+    return vet_particles
+
+def resort(vet_particles):
     sorted_vet_particulas = []
     vetSort = []
     size = 0
-    # for count,m in enumerate(vet_particulas,0):
-    for m in vet_particulas: # build vetSort, a ultima casa tem q ser 1
+    # for count,m in enumerate(vet_particles,0):
+    for m in vet_particles: # build vetSort, a ultima casa tem q ser 1
         size = size + m.W
         vetSort.append(size)
 
-    print("check last:",vetSort[-1]) #funfa?
+    print("check last:",vetSort[-1])
 
-    size = 0
+    tot = 0
     n = random.uniform(0,1)
 
     # verificar aonde esse valor de N se encontra no intervalo de tempo do vetSort
-    # pegar esta posição e usar para buscar a particula na posição no vet_particulas
+    # pegar esta posição e usar para buscar a particula na posição no vet_particles
     # atribuir essa particula "grande" selecionada ao novo vet_particula ate fechar 1 do total de peso analisado
-    while size <= 1:
+
+    for _ in range(len(vet_particles)):
         for i,sz in enumerate(vetSort,0):
-            if sz >= n:
-                sorted_vet_particulas.append(vet_particulas.__getitem__(i)) # pega a particula 'gorda'
-                size = size + n
-                n = n + 1 / len(vet_particulas)
+            if n <= sz:
+                sorted_vet_particulas.append(vet_particles[i]) # pega a particula 'gorda'
+                frag = 1 / len(vet_particles)
+                tot = tot + frag
+                n = n + frag
+                print("frag: {}|tot: {}|n: {}|".format(frag,tot,n))
+                if n > 1: #se ele extrapolar o 1, n deveria ser adicionado ao N embaixo?
+                    #perguntar pro professor
+                    n = 0
                 break
 
+    print("tot",tot)
     return sorted_vet_particulas
 
-
 def drawBox(vet_particles,frame):
-    sumX,sumY = 0
+    sumX = 0
+    sumY = 0
 
-    for m in vet_particulas:
+    for m in vet_particles:
+        frame = cv2.circle(frame, (int(m.X), int(m.Y)),2, (255, 0, 0), -1) #desenha as particulas
         sumX = sumX + m.X
         sumY = sumY + m.Y
 
     avgX = sumX / len(vet_particles)
     avgY = sumY / len(vet_particles)
 
-    frame = cv2.circle(frame,(avgX,avgY),100,(0,255,0),2)
+    frame = cv2.circle(frame,(int(avgX),int(avgY)),100,(0,255,0),2)
     cv2.imshow("predicted",frame)
 
 
@@ -121,7 +133,14 @@ def centroid(frame):
                 # cv2.imwrite("pic.png",frame)
                 return False
             return center
-        
+
+def print_vet_particles(vet_particles):
+    print("v ---------------------- v")
+    for m in vet_particles:
+        print("X: {}|Y: {}| Vx: {}| Vy: {}| W: {}| tN: {}|".format(m.X,m.Y,m.Vx,m.Vy,m.W,m.toNormalize))
+    print("^ ---------------------- ^")
+
+
 # calculaVelocidadeMedia não e utilizado
 def calculaVelocidadeMedia():
     center = None
@@ -150,6 +169,10 @@ def calculaVelocidadeMedia():
                 print("velocidade: ", velocidade)
                 lst.append(velocidade)
 
+    mediaVel = sum(lst) / len(lst)
+    print("mediaVel: ", mediaVel)
+    return mediaVel
+
 cap = cv2.VideoCapture('basket.mp4') # poem o nome do arquivo do video do professor aqui
 
 greenLower = (0, 0, 0)
@@ -157,21 +180,42 @@ greenUpper = (11, 255, 255)
 
 global deltaT, vel, maxParticles
 deltaT = 1/30
-vel = 1549
-maxParticles = 500
+vel = 15
+maxParticles = 10
 
+flag = 0
 
 while(cap.isOpened()):
 
     ret, frame = cap.read()
     if ret:
         center = centroid(frame)
+        if center == None: continue
 
-        vet_particles = start(center)
+        print("center",center)
+
+        if flag ==0:
+            print("start")
+            vet_particles = start(center)
+            print_vet_particles(vet_particles)
+            flag = 1
+
+        print("prediction")
         vet_particles = prediction(vet_particles)
+        print_vet_particles(vet_particles)
+
+        print("correction")
         vet_particles = correction(vet_particles,center)
+        print_vet_particles(vet_particles)
+
+        print("normalize")
         vet_particles = normalize(vet_particles)
+        print_vet_particles(vet_particles)
+
+        print("resort")
         vet_particles = resort(vet_particles)
+        print_vet_particles(vet_particles)
+
         drawBox(vet_particles,frame)
 
 
@@ -182,11 +226,10 @@ while(cap.isOpened()):
         cap.set(cv2.CAP_PROP_POS_FRAMES, 0) # motivo do loop eterno
 
 
-    # if cv2.waitKey(1) & 0xFF == ord('c'):
-    #     break
+    if cv2.waitKey(0) & 0xFF == ord('c'):
+        break
 
-mediaVel = sum(lst) / len(lst)
-print("mediaVel: ",mediaVel)
+
 cap.release()
 cv2.destroyAllWindows()
 
