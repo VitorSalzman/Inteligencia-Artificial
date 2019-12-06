@@ -30,7 +30,7 @@ def centroid(frame,oldcenter):
 
             if cv2.waitKey(1) & 0xFF == ord('c'):
                 # cv2.imwrite("pic.png",frame)
-                exit()
+                return False
             return center
         
 
@@ -44,6 +44,7 @@ center = None
 oldcenter = None
 lap = time.time()
 oldlap = lap
+lst = []
 
 while(cap.isOpened()):
 
@@ -54,7 +55,7 @@ while(cap.isOpened()):
         center = centroid(frame,oldcenter)
         lap = time.time()
 
-        if(center != None) and (oldcenter != None):
+        if(center != None and center != False) and (oldcenter != None):
             # print(center)
             print("CENTER IS: ",center)
             print("OldCENTER IS: ",oldcenter)
@@ -65,6 +66,11 @@ while(cap.isOpened()):
             print("dist",dist)
             velocidade = dist/diftime
             print("velocidade: ",velocidade)
+            lst.append(velocidade)
+        
+        if(center == False):
+            break
+
     else:
         cap.set(cv2.CAP_PROP_POS_FRAMES, 0) # motivo do loop eterno
 
@@ -72,6 +78,8 @@ while(cap.isOpened()):
     # if cv2.waitKey(1) & 0xFF == ord('c'):
     #     break
 
+delvel = sum(lst) / len(lst)
+print("delvel: ",delvel)
 cap.release()
 cv2.destroyAllWindows()
 
