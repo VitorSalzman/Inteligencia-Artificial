@@ -21,13 +21,13 @@ class particle():
         self.toNormalize = 0
 
     def prediction(self):
-        self.X = self.X + (deltaT * vel)
-        self.Y = self.Y + (deltaT * vel)
+        self.X = self.X + (deltaT * self.Vx)
+        self.Y = self.Y + (deltaT * self.Vy)
         self.Vx = self.Vx + random.gauss(0, pow(vel * 0.1, 2))
         self.Vy = self.Vy + random.gauss(0, pow(vel * 0.1, 2))
 
     def correction(self,center):
-        Dt = math.sqrt(pow(center[0] - self.X, 2) + pow(center[1] - self.Y, 2))
+        Dt = math.sqrt(pow((center[0] - self.X), 2) + pow((center[1] - self.Y), 2))
         self.toNormalize = 1/math.exp(Dt)
 
     def normalize(self,sumToNormalize):
@@ -63,35 +63,49 @@ def resort(vet_particles):
     sorted_vet_particulas = []
     vetSort = []
     size = 0
-    # for count,m in enumerate(vet_particles,0):
     for m in vet_particles: # build vetSort, a ultima casa tem q ser 1
         size = size + m.W
         vetSort.append(size)
 
     print("check last:",vetSort[-1])
 
-    tot = 0
+
     n = random.uniform(0,1)
+    metodo = False # ir true metodo correto, else metodo q ele deixou
 
-    # verificar aonde esse valor de N se encontra no intervalo de tempo do vetSort
-    # pegar esta posição e usar para buscar a particula na posição no vet_particles
-    # atribuir essa particula "grande" selecionada ao novo vet_particula ate fechar 1 do total de peso analisado
+    if metodo:
+        # verificar aonde esse valor de N se encontra no intervalo de tempo do vetSort
+        # pegar esta posição e usar para buscar a particula na posição no vet_particles
+        # atribuir essa particula "grande" selecionada ao novo vet_particula ate fechar 1 do total de peso analisado
 
-    for _ in range(len(vet_particles)):
-        for i,sz in enumerate(vetSort,0):
-            if n <= sz:
-                sorted_vet_particulas.append(vet_particles[i]) # pega a particula 'gorda'
-                frag = 1 / len(vet_particles)
-                tot = tot + frag
-                n = n + frag
-                print("frag: {}|tot: {}|n: {}|".format(frag,tot,n))
-                if n > 1: #se ele extrapolar o 1, n deveria ser adicionado ao N embaixo?
-                    #perguntar pro professor
-                    n = 0
-                break
+        tot = 0
+        for _ in range(len(vet_particles)):
+            for i,sz in enumerate(vetSort,0):
+                if n <= sz:
+                    sorted_vet_particulas.append(vet_particles[i]) # pega a particula 'gorda'
+                    frag = 1 / len(vet_particles)
+                    tot = tot + frag
+                    n = n + frag
+                    print("frag: {}|tot: {}|n: {}|".format(frag,tot,n))
+                    if n > 1: #se ele extrapolar o 1, n deveria ser adicionado ao N embaixo?
+                        #perguntar pro professor
+                        n = 0
+                    break
 
-    print("tot",tot)
+        print("tot",tot)
+    else:
+        for _ in range(len(vet_particles)):
+            for i,sz in enumerate(vetSort,0):
+                if n <= sz:
+                    sorted_vet_particulas.append(vet_particles[i]) # pega a particula 'gorda'
+                    n = random.uniform(0,1)
+                    break
+
     return sorted_vet_particulas
+
+def drawParticles(vet_particles,frame):
+    for m in vet_particles:
+        frame = cv2.circle(frame, (int(m.X), int(m.Y)), 5, (0, 0, 255), 2)  # desenha as particulas
 
 def drawBox(vet_particles,frame):
     sumX = 0
@@ -202,15 +216,15 @@ while(cap.isOpened()):
 
         print("prediction")
         vet_particles = prediction(vet_particles)
-        print_vet_particles(vet_particles)
+        # print_vet_particles(vet_particles)
 
         print("correction")
         vet_particles = correction(vet_particles,center)
-        print_vet_particles(vet_particles)
+        # print_vet_particles(vet_particles)
 
         print("normalize")
         vet_particles = normalize(vet_particles)
-        print_vet_particles(vet_particles)
+        # print_vet_particles(vet_particles)
 
         print("resort")
         vet_particles = resort(vet_particles)
