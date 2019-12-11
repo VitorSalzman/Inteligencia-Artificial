@@ -18,23 +18,40 @@ class particle():
         # self.Y = random.gauss(center[1],50)
         self.X = center[0]
         self.Y = center[1]
-        self.Vx = random.uniform(0, vel)  # velocidade 1549 pixels/sec
-        self.Vy = random.uniform(0, vel)  # velocidade 1549 pixels/sec
+        self.Vx = random.uniform(-VELMAX, VELMAX)  # velocidade 1549 pixels/sec
+        self.Vy = random.uniform(-VELMAX, VELMAX)  # velocidade 1549 pixels/sec
         self.W = 0
         self.toNormalize = 0
 
     def prediction(self):
         self.X = self.X + (deltaT * self.Vx)
         self.Y = self.Y + (deltaT * self.Vy)
-        self.Vx = self.Vx + random.gauss(0, pow(vel * 0.1, 2))
-        self.Vy = self.Vy + random.gauss(0, pow(vel * 0.1, 2))
+        gaussX = random.gauss(0, VELMAX * 0.1)
+        gaussY = random.gauss(0, VELMAX * 0.1)
+        self.Vx = self.Vx + gaussX
+        self.Vy = self.Vy + gaussY
+
+        print("GAUSSX: {}| GAUSSY: {}|".format(gaussX,gaussY))
+
+        if self.Vx > VELMAX :
+            self.Vx = VELMAX
+
+        if self.Vy > VELMAX :
+            self.Vy = VELMAX
+
+        if self.Vx < -VELMAX :
+            self.Vx = -VELMAX
+
+        if self.Vy < -VELMAX :
+            self.Vy = -VELMAX
 
     def correction(self,center):
         Dt = math.sqrt(pow((center[0] - self.X), 2) + pow((center[1] - self.Y), 2))
-        self.toNormalize = 1/(np.exp(Dt))
+        # self.toNormalize = 1/(np.exp( Dt ))
+        self.toNormalize = np.exp( -Dt )
 
-    # def normaliza(self,sumToNormalize):
-    #     self.W = self.toNormalize/sumToNormalize
+    def normaliza(self,sumToNormalize):
+        self.W = self.toNormalize/sumToNormalize
 
 def start(center):
     vet_particles = [particle(center) for _ in range(maxParticles)] #verificar se esta criando particulas corretamente
@@ -59,8 +76,8 @@ def normalize(vet_particles):
     # print('stn:',sumToNormalize)
 
     for m in vet_particles:
-        m.W = m.toNormalize/sumToNormalize
-        # m.normaliza(sumToNormalize)
+        # m.W = m.toNormalize/sumToNormalize
+        m.normaliza(sumToNormalize)
 
     return vet_particles
 
@@ -75,7 +92,7 @@ def resort(vet_particles):
         # print("size: {}| peso: {}".format(size,m.W))
         vetSort.append(size)
 
-    # print("check last:",vetSort[-1])
+    print("check last:",vetSort[-1])
     # print(vetSort)
 
     n = random.uniform(0,1)
@@ -206,10 +223,10 @@ cap = cv2.VideoCapture('basket.mp4') # poem o nome do arquivo do video do profes
 greenLower = (0, 0, 0)
 greenUpper = (11, 255, 255)
 
-global deltaT, vel, maxParticles
-deltaT = 1/10
-vel = 150
-maxParticles = 100
+global deltaT, VELMAX, maxParticles
+deltaT = 1/30
+VELMAX = 150
+maxParticles = 50
 
 flag = 0
 
@@ -221,38 +238,41 @@ while(cap.isOpened()):
         if center == None: continue
 
         print("center",center)
-
+        
         if flag ==0:
             print("start")
             vet_particles = start(center)
             # drawParticles(vet_particles,frame)
             flag = 1
 
+        print("before anything @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+        #print_vet_particles(vet_particles.copy())
+
         print("prediction")
         vet_particles = prediction(vet_particles)
         # drawParticles(vet_particles, frame)
         # cv2.waitKey(0)
-        # print_vet_particles(vet_particles)
+        print_vet_particles(vet_particles.copy())
 
         print("correction")
         vet_particles = correction(vet_particles,center)
         # drawParticles(vet_particles, frame)
         # cv2.waitKey(0)
-        # print_vet_particles(vet_particles)
+        # print_vet_particles(vet_particles.copy())
 
         print("normalize")
         vet_particles = normalize(vet_particles)
         # drawParticles(vet_particles, frame)
         # cv2.waitKey(0)
-        # print_vet_particles(vet_particles)
+        # print_vet_particles(vet_particles.copy())
 
         print("resort")
         vet_particles = resort(vet_particles)
         # drawParticles(vet_particles, frame)
         # cv2.waitKey(0)
-        # print_vet_particles(vet_particles)
+        print_vet_particles(vet_particles.copy())
 
-        drawBox(vet_particles,frame)
+        drawBox(vet_particles.copy(),frame)
 
 
         if(center == False):
