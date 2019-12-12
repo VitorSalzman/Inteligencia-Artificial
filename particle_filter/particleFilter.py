@@ -24,14 +24,26 @@ class particle():
         self.toNormalize = 0
 
     def prediction(self):
-        self.X = self.X + (deltaT * self.Vx)
-        self.Y = self.Y + (deltaT * self.Vy)
-        gaussX = random.gauss(0, VELMAX * 0.1)
-        gaussY = random.gauss(0, VELMAX * 0.1)
-        self.Vx = self.Vx + gaussX
-        self.Vy = self.Vy + gaussY
+        # print(" ------------- PRED INI ------------- ")
+        a = deltaT * self.Vx
+        self.X = self.X + a
+        # print("deltaT * self.Vx: {}|self.X + a: {}".format(a, self.X))
 
-        print("GAUSSX: {}| GAUSSY: {}|".format(gaussX,gaussY))
+        a = deltaT * self.Vy
+        self.Y = self.Y + a
+        # print("deltaT * self.Vy: {}|self.Y + a: {}".format(a, self.Y))
+
+        a = pow(VELMAX * 0.1, 2)
+        b = random.gauss(0, a)
+        self.Vx =self.Vx + b
+        # print("pow(VELMAX * 0.1, 2): {}|random.gauss(0, a): {}|Vx: {}|".format(a, b, self.Vx))
+
+        a = pow(VELMAX * 0.1, 2)
+        b = random.gauss(0, a)
+        self.Vy = self.Vy + b
+        # print("pow(VELMAX * 0.1, 2): {}|random.gauss(0, a): {}|Vy: {}|".format(a, b, self.Vy))
+        # print(" ------------- PRED END ------------- ")
+
 
         if self.Vx > VELMAX :
             self.Vx = VELMAX
@@ -45,27 +57,44 @@ class particle():
         if self.Vy < -VELMAX :
             self.Vy = -VELMAX
 
+        return self
+
     def correction(self,center):
         Dt = math.sqrt(pow((center[0] - self.X), 2) + pow((center[1] - self.Y), 2))
         # self.toNormalize = 1/(np.exp( Dt ))
         self.toNormalize = np.exp( -Dt )
+        return self
 
     def normaliza(self,sumToNormalize):
         self.W = self.toNormalize/sumToNormalize
+        return self
+
+    def print(self):
+        print("X: {}|Y: {}| Vx: {}| Vy: {}| W: {}| tN: {}|".format(self.X, self.Y, self.Vx, self.Vy, self.W, self.toNormalize))
+        return self
 
 def start(center):
     vet_particles = [particle(center) for _ in range(maxParticles)] #verificar se esta criando particulas corretamente
     return vet_particles
 
 def prediction(vet_particles):
+    vetAux = []
     for m in vet_particles:
-        m.prediction()
-    return vet_particles
+        newM = m.prediction()
+        m.print()
+        # newM.print()
+        vetAux.append(newM)
+
+    for i in vetAux:
+        i.print()
+    return vetAux
 
 def correction(vet_particles,center):
+    vetAux = []
     for m in vet_particles:
-        m.correction(center)
-    return vet_particles
+        vetAux.append(m.correction(center))
+        # m.print()
+    return vetAux
 
 def normalize(vet_particles):
     vetToNormalize = []
@@ -75,11 +104,12 @@ def normalize(vet_particles):
     sumToNormalize = sum(vetToNormalize)
     # print('stn:',sumToNormalize)
 
+    vetAux = []
     for m in vet_particles:
-        # m.W = m.toNormalize/sumToNormalize
-        m.normaliza(sumToNormalize)
+        vetAux.append(m.normaliza(sumToNormalize))
+        # m.print()
+    return vetAux
 
-    return vet_particles
 
 def resort(vet_particles):
     # print("@@@@@@@VVVVVVV@@@@@@@@@")
@@ -182,7 +212,7 @@ def centroid(frame):
 def print_vet_particles(vet_particles):
     print("v ---------------------- v")
     for m in vet_particles:
-        print("X: {}|Y: {}| Vx: {}| Vy: {}| W: {}| tN: {}|".format(m.X,m.Y,m.Vx,m.Vy,m.W,m.toNormalize))
+        m.print()
     print("^ ---------------------- ^")
 
 
@@ -226,7 +256,7 @@ greenUpper = (11, 255, 255)
 global deltaT, VELMAX, maxParticles
 deltaT = 1/30
 VELMAX = 150
-maxParticles = 50
+maxParticles = 5
 
 flag = 0
 
