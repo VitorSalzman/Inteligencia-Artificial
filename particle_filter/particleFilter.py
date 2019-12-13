@@ -13,7 +13,23 @@ import numpy as np
 
 class particle():
 
-    def __init__(self,center):
+    def __init__(self):
+        self.X = None
+        self.Y = None
+        self.Vx = None
+        self.Vy = None
+        self.W = 0
+        self.toNormalize = 0
+
+    def setAll(self,particle):
+        self.X = particle.X
+        self.Y = particle.Y
+        self.Vx = particle.Vx
+        self.Vy = particle.Vy
+        self.W = particle.W
+        self.toNormalize = particle.toNormalize
+
+    def start(self,center):
         # self.X = random.gauss(center[0],50)
         # self.Y = random.gauss(center[1],50)
         self.X = center[0]
@@ -35,7 +51,7 @@ class particle():
 
         a = pow(VELMAX * 0.1, 2)
         b = random.gauss(0, a)
-        self.Vx =self.Vx + b
+        self.Vx = self.Vx + b
         # print("pow(VELMAX * 0.1, 2): {}|random.gauss(0, a): {}|Vx: {}|".format(a, b, self.Vx))
 
         a = pow(VELMAX * 0.1, 2)
@@ -43,7 +59,6 @@ class particle():
         self.Vy = self.Vy + b
         # print("pow(VELMAX * 0.1, 2): {}|random.gauss(0, a): {}|Vy: {}|".format(a, b, self.Vy))
         # print(" ------------- PRED END ------------- ")
-
 
         if self.Vx > VELMAX :
             self.Vx = VELMAX
@@ -74,26 +89,32 @@ class particle():
         return self
 
 def start(center):
-    vet_particles = [particle(center) for _ in range(maxParticles)] #verificar se esta criando particulas corretamente
+    vet_particles = []
+    for _ in range(maxParticles):
+        m = particle()
+        m.start(center)
+        vet_particles.append(m)
     return vet_particles
 
 def prediction(vet_particles):
-    vetAux = []
-    for m in vet_particles:
-        newM = m.prediction()
+    vetAux = [particle() for _ in range(maxParticles) ]
+    for i,m in enumerate(vet_particles,0):
+        M = m.prediction()
+        vetAux[i].setAll(M)
         m.print()
-        # newM.print()
-        vetAux.append(newM)
 
+    print('test')
     for i in vetAux:
         i.print()
     return vetAux
 
 def correction(vet_particles,center):
-    vetAux = []
-    for m in vet_particles:
-        vetAux.append(m.correction(center))
+    vetAux = [particle() for _ in range(maxParticles)]
+    for i, m in enumerate(vet_particles, 0):
+        M = m.correction(center)
+        vetAux[i].setAll(M)
         # m.print()
+
     return vetAux
 
 def normalize(vet_particles):
@@ -104,17 +125,21 @@ def normalize(vet_particles):
     sumToNormalize = sum(vetToNormalize)
     # print('stn:',sumToNormalize)
 
-    vetAux = []
-    for m in vet_particles:
-        vetAux.append(m.normaliza(sumToNormalize))
+    vetAux = [particle() for _ in range(maxParticles)]
+    for i, m in enumerate(vet_particles, 0):
+        M = m.normaliza(sumToNormalize)
+        vetAux[i].setAll(M)
         # m.print()
+
     return vetAux
 
 
 def resort(vet_particles):
     # print("@@@@@@@VVVVVVV@@@@@@@@@")
     # print_vet_particles(vet_particles)
-    sorted_vet_particulas = []
+
+    sorted_vet_particulas = [particle() for _ in range(maxParticles)]
+
     vetSort = []
     size = 0
     for m in vet_particles: # build vetSort, a ultima casa tem q ser 1
@@ -150,11 +175,14 @@ def resort(vet_particles):
         #
         # print("tot",tot)
     else:
+        z = 0
         for _ in range(len(vet_particles)):
             for i,sz in enumerate(vetSort,0):
                 if n <= sz:
                     # print("casa: {}|sz: {}| n: {}|".format(i, sz, n))
-                    sorted_vet_particulas.append(vet_particles[i]) # pega a particula 'gorda'
+                    M = vet_particles[i]
+                    sorted_vet_particulas[z].setAll(M) # pega a particula 'gorda'
+                    z += 1
                     # print("peso P: ",vet_particles[i].W)
                     n = random.uniform(0,1)
                     break
@@ -175,7 +203,7 @@ def drawBox(vet_particles,frame):
     sumY = 0
 
     for m in vet_particles:
-        frame = cv2.circle(frame.copy(), (int(m.X), int(m.Y)),2, (255, 0, 0), -1) #desenha as particulas
+        frame = cv2.circle(frame.copy(), (int(m.X), int(m.Y)),4, (255, 0, 0), -1) #desenha as particulas
         sumX = sumX + m.X
         sumY = sumY + m.Y
 
@@ -255,8 +283,8 @@ greenUpper = (11, 255, 255)
 
 global deltaT, VELMAX, maxParticles
 deltaT = 1/30
-VELMAX = 150
-maxParticles = 5
+VELMAX = 1500
+maxParticles = 100
 
 flag = 0
 
@@ -312,7 +340,7 @@ while(cap.isOpened()):
         cap.set(cv2.CAP_PROP_POS_FRAMES, 0) # motivo do loop eterno
 
 
-    if cv2.waitKey(0) & 0xFF == ord('c'):
+    if cv2.waitKey(1) & 0xFF == ord('c'):
         break
 
 
