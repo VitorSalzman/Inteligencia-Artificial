@@ -7,7 +7,7 @@ import numpy as np
 
 import particle as p
 
-maxParticles = 10
+maxParticles = 500
 
 def start(center):
     vet_particles = []
@@ -112,11 +112,6 @@ def resort(vet_particles):
 
     return sorted_vet_particulas
 
-def drawParticles(vet_particles,frame):
-    for m in vet_particles:
-        frame = cv2.circle(frame.copy(), (int(m.X), int(m.Y)), 2, (255, 0, 255), -1)  # desenha as particulas
-
-    cv2.imshow("particles",frame)
 
 def drawBox(vet_particles,frame,name):
     # frame = cv2.copyMakeBorder(frame,50,50,50,50,cv2.BORDER_CONSTANT,value= (255,255,255))
@@ -143,7 +138,7 @@ def drawBox(vet_particles,frame,name):
     
 
 
-    cv2.imshow(name,frame)
+    # cv2.imshow(name,frame)
 
     # deletar apos a conclusão
     # cv2.waitKey(0)
@@ -166,7 +161,7 @@ def filter_steps(vet_particles,center,frame):
 
         # print("prediction")
         vet_particles = prediction(vet_particles)
-        frame = drawBox(vet_particles, frame,"prediction")
+        frame_drawed = drawBox(vet_particles, frame,"prediction")
         # print_vet_particles(vet_particles.copy())
 
         # print("correction")
@@ -186,6 +181,6 @@ def filter_steps(vet_particles,center,frame):
         # frame = drawBox(vet_particles, frame,"resort")
 
         # cv2.imshow("STALPH",frame)
-        cv2.waitKey(1)
+        # cv2.waitKey(1)
 
-        return vet_particles
+        return (vet_particles,frame_drawed)
