@@ -147,40 +147,64 @@ def drawBox(vet_particles,frame,name):
     
     return frame
 
+def calc_avg_particles(vet_particles):
+    sumX = 0
+    sumY = 0
+
+    NsumX = np.sum(vet_particles.X)
+    NsumY = np.sum(vet_particles.Y)
+    print("NsumX: {} | NsumY: {}".format(NsumX,NsumY))
+    for m in vet_particles:
+        sumX = sumX + m.X
+        sumY = sumY + m.Y
+
+    print("sumX: {} | sumY: {}".format(sumX,sumY))
+    avgX = int(sumX / len(vet_particles))
+    avgY = int(sumY / len(vet_particles))
+
 def print_vet_particles(vet_particles):
     print("v ---------------------- v")
     for m in vet_particles:
         m.print()
     print("^ ---------------------- ^")
 
-def filter_steps(vet_particles,center,frame):
+def filter_steps(vet_particles,center,frame = None):
     
-        # print("before anything @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-        # drawBox(vet_particles, frame,"start")
-        # print_vet_particles(vet_particles.copy())
 
-        # print("prediction")
-        vet_particles = prediction(vet_particles)
+    # print("correction")
+    vet_particles = correction(vet_particles,center)
+    # drawBox(vet_particles, frame,"correction")
+    # print_vet_particles(vet_particles.copy())
+
+    # print("normalize")
+    vet_particles = normalize(vet_particles)
+    # drawBox(vet_particles, frame,"normalize")
+    # print_vet_particles(vet_particles.copy())
+
+    # print("resort")
+    vet_particles = resort(vet_particles)
+    # print_vet_particles(vet_particles.copy())
+
+    # frame = drawBox(vet_particles, frame,"resort")
+
+    #  subi da correção para cima para ficar mais pratico retornar o vetor predizido.
+    #  Quando colocar ele novamente no input ele ira filtrar e dar um novo conjunto predizido.
+
+    # print("before anything @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    # drawBox(vet_particles, frame,"start")
+    # print_vet_particles(vet_particles.copy())
+
+    # print("prediction")
+    vet_particles = prediction(vet_particles)
+    if frame is not None:
         frame_drawed = drawBox(vet_particles, frame,"prediction")
-        # print_vet_particles(vet_particles.copy())
+    # print_vet_particles(vet_particles.copy())
 
-        # print("correction")
-        vet_particles = correction(vet_particles,center)
-        # drawBox(vet_particles, frame,"correction")
-        # print_vet_particles(vet_particles.copy())
+    
 
-        # print("normalize")
-        vet_particles = normalize(vet_particles)
-        # drawBox(vet_particles, frame,"normalize")
-        # print_vet_particles(vet_particles.copy())
-
-        # print("resort")
-        vet_particles = resort(vet_particles)
-        # print_vet_particles(vet_particles.copy())
-
-        # frame = drawBox(vet_particles, frame,"resort")
-
-        # cv2.imshow("STALPH",frame)
-        # cv2.waitKey(1)
-
+    # cv2.imshow("STALPH",frame)
+    # cv2.waitKey(1)
+    if frame is not None:
         return (vet_particles,frame_drawed)
+    
+    return (vet_particles,frame)

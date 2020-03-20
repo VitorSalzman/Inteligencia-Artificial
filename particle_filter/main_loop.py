@@ -18,48 +18,6 @@ import image_process as ip
 # cap = cv2.VideoCapture('basket.mp4') # poem o nome do arquivo do video do professor aqui
 
 
-
-# while(cap.isOpened()):
-
-#	 ret, frame = cap.read()
-#	 if ret:
-		
-
-
-#		 if(center == False):
-#			 break
-
-
-#	 else:
-#		 cap.set(cv2.CAP_PROP_POS_FRAMES, 0) # motivo do loop eterno
-
-
-#	 if cv2.waitKey(1) & 0xFF == ord('c'):
-#		 break
-
-
-# cap.release()
-# cv2.destroyAllWindows()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # initialize the video stream, pointer to output video file, and
 # frame dimensions
 vs = cv2.VideoCapture('basket.mp4')
@@ -99,9 +57,7 @@ while True:
 	# print("center",center)
 
 	if flag ==0:
-		# print("start")
 		vet_particles = pf.start(center)
-		# drawParticles(vet_particles,frame)
 		flag = 1
 	
 	(vet_particles,frame_drawed) = pf.filter_steps(vet_particles,center,frame) #remover esse frame quando estiver funcionando
@@ -111,28 +67,29 @@ while True:
 	
 	# pf.print_vet_particles(vet_particles.copy())
 
-
+	cv2.imshow("Image", frame)
+	cv2.waitKey(0)
 
 
 	end = time.time()
+
 	# check if the video writer is None
-	if writer is None:
-		# initialize our video writer
-		fourcc = cv2.VideoWriter_fourcc(*"MJPG")
-		writer = cv2.VideoWriter('basket.avi', fourcc, 30,
-			(frame.shape[1], frame.shape[0]), True)
+	# if writer is None:
+	# 	# initialize our video writer
+	# 	fourcc = cv2.VideoWriter_fourcc(*"MJPG")
+	# 	writer = cv2.VideoWriter('basket.avi', fourcc, 30,
+	# 		(frame.shape[1], frame.shape[0]), True)
 
-		# some information on processing single frame
-		if total > 0:
-			elap = (end - start)
-			print("[INFO] single frame took {:.4f} seconds".format(elap))
-			print("[INFO] estimated total time to finish: {:.4f}".format(
-				elap * total))
+	# 	# some information on processing single frame
+	# 	if total > 0:
+	# 		elap = (end - start)
+	# 		print("[INFO] single frame took {:.4f} seconds".format(elap))
+	# 		print("[INFO] estimated total time to finish: {:.4f}".format(
+	# 			elap * total))
 
-	# cv2.imshow("Image", frame)
-	# cv2.waitKey(0)
+	
 	# write the output frame to disk
-	writer.write(frame)
+	# writer.write(frame)
 
 # release the file pointers
 print("[INFO] cleaning up...")
