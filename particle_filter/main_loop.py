@@ -54,42 +54,41 @@ while True:
 	center = ip.find_centroid(frame)
 	if center == None: continue
 
-	# print("center",center)
-
 	if flag ==0:
 		vet_particles = pf.start(center)
 		flag = 1
-	
-	(vet_particles,frame_drawed) = pf.filter_steps(vet_particles,center,frame) #remover esse frame quando estiver funcionando
 
-	frame = frame_drawed
-	# frame = pf.drawBox(vet_particles.copy())
+	(vet_particles,vet_particles_pred) = pf.filter_steps(vet_particles,center)
+
 	
-	# pf.print_vet_particles(vet_particles.copy())
+	frame = pf.drawBox(vet_particles_pred,frame,'prediction')
+	
+	pred_center = pf.calc_avg_particles(vet_particles_pred)
+
 
 	cv2.imshow("Image", frame)
-	cv2.waitKey(0)
+	# cv2.waitKey(0)
 
 
 	end = time.time()
 
 	# check if the video writer is None
-	# if writer is None:
-	# 	# initialize our video writer
-	# 	fourcc = cv2.VideoWriter_fourcc(*"MJPG")
-	# 	writer = cv2.VideoWriter('basket.avi', fourcc, 30,
-	# 		(frame.shape[1], frame.shape[0]), True)
+	if writer is None:
+		# initialize our video writer
+		fourcc = cv2.VideoWriter_fourcc(*"MJPG")
+		writer = cv2.VideoWriter('basket.avi', fourcc, 30,
+			(frame.shape[1], frame.shape[0]), True)
 
-	# 	# some information on processing single frame
-	# 	if total > 0:
-	# 		elap = (end - start)
-	# 		print("[INFO] single frame took {:.4f} seconds".format(elap))
-	# 		print("[INFO] estimated total time to finish: {:.4f}".format(
-	# 			elap * total))
+		# some information on processing single frame
+		if total > 0:
+			elap = (end - start)
+			print("[INFO] single frame took {:.4f} seconds".format(elap))
+			print("[INFO] estimated total time to finish: {:.4f}".format(
+				elap * total))
 
 	
 	# write the output frame to disk
-	# writer.write(frame)
+	writer.write(frame)
 
 # release the file pointers
 print("[INFO] cleaning up...")

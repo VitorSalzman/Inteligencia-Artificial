@@ -18,49 +18,35 @@ def start(center):
     return vet_particles
 
 def prediction(vet_particles):
-    vetAux = [p.particle() for _ in range(maxParticles) ]
+    # vetAux = [p.particle() for _ in range(maxParticles) ]
     for i,m in enumerate(vet_particles,0):
-        M = m.prediction()
-        vetAux[i].setAll(M)
-        # m.print()
-
-    # print('test')
-    # for i in vetAux:
-    #     i.print()
-    return vetAux
+        m = m.prediction()
+    return vet_particles
 
 def correction(vet_particles,center):
     vetAux = [p.particle() for _ in range(maxParticles)]
     for i, m in enumerate(vet_particles, 0):
-        M = m.correction(center)
-        vetAux[i].setAll(M)
-        # m.print()
+        m = m.correction(center)
 
-    return vetAux
+    # return vet_particles
 
 def normalize(vet_particles):
-    vetToNormalize = []
+    sumvet = 0
     for m in vet_particles:
-        vetToNormalize.append(m.toNormalize)
-
-    sumToNormalize = sum(vetToNormalize)
-    # print('stn:',sumToNormalize)
-
-    vetAux = [p.particle() for _ in range(maxParticles)]
+        sumvet += m.toNormalize
+    
     for i, m in enumerate(vet_particles, 0):
-        M = m.normaliza(sumToNormalize)
-        vetAux[i].setAll(M)
-        # m.print()
+        m = m.normaliza(sumvet)
 
-    return vetAux
+    # return vet_particles
 
 def resort(vet_particles):
     # print("@@@@@@@VVVVVVV@@@@@@@@@")
     # print_vet_particles(vet_particles)
 
     sorted_vet_particulas = [p.particle() for _ in range(maxParticles)]
-
     vetSort = []
+    
     size = 0
     for m in vet_particles: # build vetSort, a ultima casa tem q ser 1
         size = size + m.W
@@ -75,34 +61,32 @@ def resort(vet_particles):
 
     if metodo:
         print('n vai roda')
-        # verificar aonde esse valor de N se encontra no intervalo de tempo do vetSort
-        # pegar esta posição e usar para buscar a particula na posição no vet_particles
-        # atribuir essa particula "grande" selecionada ao novo vet_particula ate fechar 1 do total de peso analisado
+        # # verificar aonde esse valor de N se encontra no intervalo de tempo do vetSort
+        # # pegar esta posição e usar para buscar a particula na posição no vet_particles
+        # # atribuir essa particula "grande" selecionada ao novo vet_particula ate fechar 1 do total de peso analisado
         
-        tot = 0
-        for _ in range(len(vet_particles)):
-            for i,sz in enumerate(vetSort,0):
-                if n <= sz:
-                    sorted_vet_particulas.append(vet_particles[i]) # pega a particula 'gorda'
-                    frag = 1 / len(vet_particles)
-                    tot = tot + frag
-                    n = n + frag
-                    # print("frag: {}|tot: {}|n: {}|".format(frag,tot,n))
-                    if n > 1: #se ele extrapolar o 1, n deveria ser adicionado ao N embaixo?
-                        #perguntar pro professor
-                        n = 0
-                    break
+        # tot = 0
+        # for _ in range(len(vet_particles)):
+        #     for i,sz in enumerate(vetSort,0):
+        #         if n <= sz:
+        #             sorted_vet_particulas.append(vet_particles[i]) # pega a particula 'gorda'
+        #             frag = 1 / len(vet_particles)
+        #             tot = tot + frag
+        #             n = n + frag
+        #             # print("frag: {}|tot: {}|n: {}|".format(frag,tot,n))
+        #             if n > 1: #se ele extrapolar o 1, n deveria ser adicionado ao N embaixo?
+        #                 #perguntar pro professor
+        #                 n = 0
+        #             break
         
-        print("tot",tot)
+        # print("tot",tot)
     else:
-        z = 0
-        for _ in range(len(vet_particles)):
+        for z in range(len(vet_particles)):
             for i,sz in enumerate(vetSort,0):
                 if n <= sz:
                     # print("casa: {}|sz: {}| n: {}|".format(i, sz, n))
                     M = vet_particles[i]
                     sorted_vet_particulas[z].setAll(M) # pega a particula 'gorda'
-                    z += 1
                     # print("peso P: ",vet_particles[i].W)
                     n = random.uniform(0,1)
                     break
@@ -134,33 +118,20 @@ def drawBox(vet_particles,frame,name):
     
     text = "avgX: {} | avgY: {}".format(avgX, avgY)
     frame = cv2.putText(frame,text,(avgX+100,avgY+100),cv2.FONT_HERSHEY_SIMPLEX,0.5, roxo,2)
-    
-    
-
-
-    # cv2.imshow(name,frame)
-
-    # deletar apos a conclusão
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
-
-    
+        
     return frame
 
 def calc_avg_particles(vet_particles):
     sumX = 0
     sumY = 0
 
-    NsumX = np.sum(vet_particles.X)
-    NsumY = np.sum(vet_particles.Y)
-    print("NsumX: {} | NsumY: {}".format(NsumX,NsumY))
     for m in vet_particles:
         sumX = sumX + m.X
         sumY = sumY + m.Y
 
-    print("sumX: {} | sumY: {}".format(sumX,sumY))
-    avgX = int(sumX / len(vet_particles))
-    avgY = int(sumY / len(vet_particles))
+    return (int(sumX / len(vet_particles)),int(sumY / len(vet_particles)))
+
+
 
 def print_vet_particles(vet_particles):
     print("v ---------------------- v")
@@ -168,43 +139,17 @@ def print_vet_particles(vet_particles):
         m.print()
     print("^ ---------------------- ^")
 
-def filter_steps(vet_particles,center,frame = None):
+def filter_steps(vet_particles,center):
     
 
-    # print("correction")
-    vet_particles = correction(vet_particles,center)
-    # drawBox(vet_particles, frame,"correction")
-    # print_vet_particles(vet_particles.copy())
+        vet_particles_pred = prediction(vet_particles)
+        
+        if center is not None:
+            correction(vet_particles_pred,center)
+            normalize(vet_particles)
+            vet_particles = resort(vet_particles)
+        else:
+            vet_particles = vet_particles_pred
 
-    # print("normalize")
-    vet_particles = normalize(vet_particles)
-    # drawBox(vet_particles, frame,"normalize")
-    # print_vet_particles(vet_particles.copy())
-
-    # print("resort")
-    vet_particles = resort(vet_particles)
-    # print_vet_particles(vet_particles.copy())
-
-    # frame = drawBox(vet_particles, frame,"resort")
-
-    #  subi da correção para cima para ficar mais pratico retornar o vetor predizido.
-    #  Quando colocar ele novamente no input ele ira filtrar e dar um novo conjunto predizido.
-
-    # print("before anything @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-    # drawBox(vet_particles, frame,"start")
-    # print_vet_particles(vet_particles.copy())
-
-    # print("prediction")
-    vet_particles = prediction(vet_particles)
-    if frame is not None:
-        frame_drawed = drawBox(vet_particles, frame,"prediction")
-    # print_vet_particles(vet_particles.copy())
-
-    
-
-    # cv2.imshow("STALPH",frame)
-    # cv2.waitKey(1)
-    if frame is not None:
-        return (vet_particles,frame_drawed)
-    
-    return (vet_particles,frame)
+        
+        return (vet_particles,vet_particles_pred)
