@@ -37,24 +37,57 @@ except:
 	print("[INFO] no approx. completion time can be provided")
 	total = -1
 
+#define constant
+TIMELOCKED = 15
+TIMELOST = 5
+
+contPerdeSinal = TIMELOCKED
+contTempoPerdido = TIMELOST
 flag = 0
+
+find = True
 
 # loop over frames from the video file stream
 while True:
-	# read the next frame from the file
 	(grabbed, frame) = vs.read()
 
-	# if the frame was not grabbed, then we have reached the end
-	# of the stream
 	if not grabbed:
 		break
-
+	
 	start = time.time()
+	center = None
 
-	center = ip.find_centroid(frame)
-	if center == None: continue
+	H,W,_ = frame.copy().shape
+
+	text1 = "count to miss center: {}".format(contPerdeSinal)
+	cv2.putText(frame,text1,(W-220,H-40),cv2.FONT_HERSHEY_SIMPLEX,0.5, (255, 0, 0),2)
+
+	if contPerdeSinal < 0:
+		find = False
+		if contTempoPerdido < 0:
+			find = True
+			contPerdeSinal = TIMELOCKED
+			contTempoPerdido = TIMELOST
+
+		contTempoPerdido = contTempoPerdido -1
+	contPerdeSinal = contPerdeSinal -1
+
+	if find is True:
+		center = ip.find_centroid(frame)
+		text2 = "Target: LOCKED"
+		cv2.putText(frame,text2,(W-220,H-20),cv2.FONT_HERSHEY_SIMPLEX,0.5, (0, 255, 0),2)
+	else:
+		center = None
+		text2 = "Target: LOST"
+		cv2.putText(frame,text2,(W-220,H-20),cv2.FONT_HERSHEY_SIMPLEX,0.5, (0, 0, 255),2)
+	
+	
+
+
+	# print("center: {}".format(center))
 
 	if flag ==0:
+		if center is None: continue
 		vet_particles = pf.start(center)
 		flag = 1
 
@@ -66,7 +99,7 @@ while True:
 	pred_center = pf.calc_avg_particles(vet_particles_pred)
 
 
-	cv2.imshow("Image", frame)
+	# cv2.imshow("Image", frame)
 	# cv2.waitKey(0)
 
 
