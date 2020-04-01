@@ -43,7 +43,7 @@ TIMELOST = 5
 
 contPerdeSinal = TIMELOCKED
 contTempoPerdido = TIMELOST
-flag = 0
+filter_is_on = False
 
 find = True
 
@@ -86,17 +86,18 @@ while True:
 
 	# print("center: {}".format(center))
 
-	if flag ==0:
+	if filter_is_on == False:
 		if center is None: continue
-		vet_particles = pf.start(center)
-		flag = 1
+		particleFilter = pf.ParticleFilter(500,center,10)
+		filter_is_on = True
 
-	(vet_particles,vet_particles_pred) = pf.filter_steps(vet_particles,center)
+	if particleFilter.filter_steps(center) is False :
+		filter_is_on = False
+		continue
 
-	
-	frame = pf.drawBox(vet_particles_pred,frame,'prediction')
-	
-	pred_center = pf.calc_avg_particles(vet_particles_pred)
+	frame = particleFilter.drawBox(frame)
+	cv2.imshow("Image",frame)
+
 
 
 	# cv2.imshow("Image", frame)

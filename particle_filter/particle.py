@@ -5,7 +5,7 @@ import time
 import random
 import numpy as np
 
-deltaT = 1/30
+DELTA_T = 1/30
 VELMAX = 3000
 
 class particle():
@@ -15,15 +15,19 @@ class particle():
         self.Y = None
         self.Vx = None
         self.Vy = None
-        self.W = 0
+        self.weight = 0
         self.toNormalize = 0
+
+        # ToDo: deixar tais parametros configuraveis pelo cliente
+        # self.deltaT = DELTA_T
+        # self.velMax = VELMAX
 
     def setAll(self,particle):
         self.X = int(particle.X)
         self.Y = int(particle.Y)
         self.Vx = particle.Vx
         self.Vy = particle.Vy
-        self.W = particle.W
+        self.weight = particle.weight
         self.toNormalize = particle.toNormalize
 
     def start(self,center):
@@ -33,7 +37,7 @@ class particle():
         self.Y = int(center[1])
         self.Vx = random.uniform(-VELMAX, VELMAX)  # velocidade 1549 pixels/sec
         self.Vy = random.uniform(-VELMAX, VELMAX)  # velocidade 1549 pixels/sec
-        self.W = 0
+        self.weight = 0
         self.toNormalize = 0
 
     def prediction(self):
@@ -62,13 +66,13 @@ class particle():
         if self.Vy < -VELMAX :
             self.Vy = -VELMAX
 
-        a = deltaT * self.Vx
+        a = DELTA_T * self.Vx
         self.X = int(self.X + a)
-        # print("deltaT * self.Vx: {}|self.X + a: {}".format(a, self.X))
+        # print("DELTA_T * self.Vx: {}|self.X + a: {}".format(a, self.X))
 
-        a = deltaT * self.Vy
+        a = DELTA_T * self.Vy
         self.Y = int(self.Y + a)
-        # print("deltaT * self.Vy: {}|self.Y + a: {}".format(a, self.Y))
+        # print("DELTA_T * self.Vy: {}|self.Y + a: {}".format(a, self.Y))
         # print(" ------------- PRED END ------------- ")
 
         return self
@@ -80,9 +84,9 @@ class particle():
         return self
 
     def normaliza(self,sumToNormalize):
-        self.W = self.toNormalize/sumToNormalize
+        self.weight = self.toNormalize/sumToNormalize
         return self
 
     def print(self):
-        print("X: {: >5}|Y: {: >5}| Vx: {: >10.3f}| Vy: {: >10.3f}| W: {: >8.3f}| tN: {: >5.15f}|".format(self.X, self.Y, self.Vx, self.Vy, self.W, self.toNormalize))
+        print("X: {: >5}|Y: {: >5}| Vx: {: >10.3f}| Vy: {: >10.3f}| weight: {: >8.3f}| tN: {: >5.15f}|".format(self.X, self.Y, self.Vx, self.Vy, self.weight, self.toNormalize))
         return self
